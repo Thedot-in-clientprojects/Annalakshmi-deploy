@@ -1,0 +1,22 @@
+[
+  {
+    "icon": "pe-7s-paper-plane",
+    "title": "Direct Access",
+    "description": "Send invoices, collect payment, convert payouts to fiat currency, or keep the cryptocurrency."
+  },
+  {
+    "icon": "pe-7s-rocket",
+    "title": "Real time activity",
+    "description": "Send invoices, collect payment, convert payouts to fiat currency, or keep the cryptocurrency."
+  },
+  {
+    "icon": "pe-7s-phone",
+    "title": "Mobile Capability",
+    "description": "Send invoices, collect payment, convert payouts to fiat currency, or keep the cryptocurrency."
+  },
+  {
+    "icon": "pe-7s-wallet",
+    "title": "Easy Payments",
+    "description": "Send invoices, collect payment, convert payouts to fiat currency, or keep the cryptocurrency."
+  }
+]

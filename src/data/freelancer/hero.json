@@ -1,0 +1,33 @@
+{
+  "circles": [
+    {
+      "icon": "pe-7s-mouse",
+      "titleTop": "ui / ux", 
+      "titleBottom": "Designer" 
+    },
+    {
+      "icon": "pe-7s-vector",
+      "titleTop": "Web", 
+      "titleBottom": "Development" 
+    },
+    {
+      "icon": "pe-7s-coffee",
+      "titleTop": "Branding", 
+      "titleBottom": "Designer" 
+    }
+  ],
+  "about": {
+    "quote": "Design is not how you think,design is how it works.a life changing statement by jobs.",
+    "details": "In sed dolor ut ligula malesuada sollicitudin. Morbi iaculis convallis arcu, nec maximus tellus sodales in. Morbi iaculis convallis arcu, nec maximus tellus sodales in blandit enim at nisl loborti."
+  },
+  "numbers": [
+    {
+      "title": "successful projects",
+      "value": "100%"
+    },
+    {
+      "title": "completed projects",
+      "value": "720 +"
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+.gallery-top .swiper-wrapper {
+  text-align: center;
+}
+
+.work-carsouel.crv .work-crsol.swiper {
+  overflow: unset;
+}
+
+.skill-progress span {
+  display: none!important;
+}
+
+.modal-video {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+}
+
+.react-slidedown {
+  overflow: hidden;
+  transition-duration: 0.4s!important;
+}
+
+.about-main{   
+  margin-top: 85px;
+  background-image: url(../../public/img/aboubg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 40vh;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-position: center;
+}
+
+.founder-img{
+  width: 40%;
+  padding: 2rem 0;
+}
+
+
+
+
+
+.bg-layer{
+  background-image: url(../../public/img/aboutbg-layer.png);
+  background-size: contain;
+  background-repeat: repeat-y;
+}
+
+.test-text-one{
+  font-size: 2rem;
+  color: #9B1915;
+  
+}
+
+
+
+
+/* font */
+/* font */
+/* font */
+
+
+@font-face {
+  font-family: GilroyExtra;
+  src: url(../../public/fonts/Gilroy-FREE/Gilroy-ExtraBold.otf);
+}
+@font-face {
+  font-family: GilroyMedium;
+  src: url(../../public/fonts/Gilroy-FREE/Gilroy-Medium.ttf);
+}
+
+@font-face {
+  font-family: Saman;
+  src: url(../../public/fonts/SAMAN___.TTF);
+}
+
+@font-face {
+  font-family: Geometric;
+  src: url(../../public/fonts/geometric.ttf);
+}
+
+.gilroyEB{
+  font-family: GilroyExtra;
+}
+.gilroyM{
+  font-family: GilroyMedium;
+}
+
+.saman{
+  font-family: saman;
+  font-weight: 500;
+}
+
+
+/* font */
+/* font */
+/* font */
+
+
+
+@media only screen and (max-width: 780px) {
+  .logo{
+    width: 200px;
+  }
+}
+
+
+/* header */
+/* header */
+/* header */
+/* header */
+
+
+.header-main{
+  background-image: url(/img/annalakmainbg.png);
+  min-height: 90vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 1450px) {
+  .header-main{
+    background-position: right;
+  }
+}
+
+.header-main-img{
+  width: 10rem;
+}
+.header-main-title{
+  margin-left: 1.5rem;
+  font-family: "Geometric", sans-serif;
+  color: #fff;
+}
+.header-main-btn{
+  margin-left: 1.5rem;
+  margin-top: 2rem;
+  padding: 10px 20px;
+  background-color: #971A1F;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-family: "GilroyExtra", sans-serif;
+}
+.header-main-sbtn{
+  margin-top: 2rem;
+  padding: 10px 20px;
+  background-color: #971A1F;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-family: "GilroyExtra", sans-serif;
+}
+
+
+/* header */
+/* header */
+/* header */
+/* header */

@@ -1,0 +1,58 @@
+{
+  "filters": [
+    {
+      "name": "All",
+      "operator": "*"
+    },
+    {
+      "name": "Branding",
+      "operator": ".brand"
+    },
+    {
+      "name": "Mobile App",
+      "operator": ".web"
+    },
+    {
+      "name": "Creative",
+      "operator": ".graphic"
+    }
+  ],
+  "images": [
+    {
+      "url": "img/portfolio/1/1.jpg",
+      "type": "Web Design",
+      "title": "Creative art work",
+      "filter": "graphic"
+    },
+    {
+      "url": "img/portfolio/1/2.jpg",
+      "type": "Web Design",
+      "title": "Photo Retouching",
+      "filter": "web"
+    },
+    {
+      "url": "img/portfolio/1/3.jpg",
+      "type": "Web Design",
+      "title": "Artboard Studio",
+      "filter": "brand"
+    },
+    {
+      "url": "img/portfolio/1/5.jpg",
+      "type": "Web Design",
+      "title": "Create by creatives",
+      "filter": "web"
+    },
+    {
+      "url": "img/portfolio/1/4.jpg",
+      "type": "Web Design",
+      "title": "Digital art works",
+      "filter": "graphic"
+    },
+    {
+      "url": "img/portfolio/1/6.jpg",
+      "type": "Web Design",
+      "title": "Modern workspace",
+      "filter": "brand"
+    }
+  ]
+}
