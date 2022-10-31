@@ -326,7 +326,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                 {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
                     if(res[1].status === 'New')
                     return(
-                        <Card sx={{ minWidth: 275 }} style={res[1].session != 'Lunch' ? {
+                        <Card key={index} sx={{ minWidth: 275 }} style={res[1].session != 'Lunch' ? {
                             backgroundColor:'#BAFF9F',
                             margin:15,
                             marginBottom:15
@@ -394,7 +394,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                 {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
                     if(res[1].status === 'Accept')
                     return(
-                        <Card sx={{ minWidth: 275 }} style={{
+                        <Card  key={index} sx={{ minWidth: 275 }} style={{
                             backgroundColor:'#BAFF9F',
                             margin:15,
                             marginBottom:15
@@ -455,7 +455,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                 {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
                     if(res[1].status === 'Process')
                     return(
-                        <Card sx={{ minWidth: 275 }} style={{
+                        <Card key={index} sx={{ minWidth: 275 }} style={{
                             backgroundColor:'#BAFF9F',
                             margin:15,
                             marginBottom:15
@@ -519,7 +519,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                 {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
                     if(res[1].status === 'Done')
                     return(
-                        <Card sx={{ minWidth: 275 }} style={{
+                        <Card key={index} sx={{ minWidth: 275 }} style={{
                             backgroundColor:'#BAFF9F',
                             margin:15,
                             marginBottom:15
@@ -645,7 +645,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
         {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
                     if(res[1].status === 'Complete')
                     return(
-                        <Card sx={{ minWidth: 275 }} style={{
+                        <Card key={index} sx={{ minWidth: 275 }} style={{
                             backgroundColor:'#FF8181',
                             margin:15,
                             marginBottom:15
@@ -705,7 +705,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
         {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
                     if(res[1].status === 'Hold')
                     return(
-                        <Card sx={{ minWidth: 275 }} style={{
+                        <Card key={index} sx={{ minWidth: 275 }} style={{
                             backgroundColor:'#FF8181',
                             margin:15,
                             marginBottom:15
@@ -765,7 +765,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
         {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
                     if(res[1].status === 'Rejected')
                     return(
-                        <Card sx={{ minWidth: 275 }} style={{
+                        <Card key={index} sx={{ minWidth: 275 }} style={{
                             backgroundColor:'#FF8181',
                             margin:15,
                             marginBottom:15
@@ -826,7 +826,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
         </div> 
             {getAllBookings && Object.entries(getAllBookings).map((book, index) => {
                 return(
-                    <div>
+                    <div key={index}>
                         <p>
                             {
                                 book[1].name

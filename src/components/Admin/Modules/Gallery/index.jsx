@@ -113,7 +113,7 @@ function GalleryAdmin() {
 
   return (
     <div><h3 className='gilroyM'>Gallery</h3>
-        <label  className="form-label gilroyM" for="customFile">click below and choose the image file you need to upload</label>
+        <label  className="form-label gilroyM">click below and choose the image file you need to upload</label>
         <input type="file" className="form-control" id="customFile" onChange={onFileInputChange}/>
         <MDBBtn className='mt-2 gilroyM' onClick={uploadImage}>Upload</MDBBtn>
          <div className="text-center mt-40">
@@ -125,7 +125,7 @@ function GalleryAdmin() {
         <div>
             {getAllGalleryData && Object.entries(getAllGalleryData).map((galler, index) => {
                 return(
-                    <img src={galler[1].url} style={{ 
+                    <img key={index} src={galler[1].url} style={{ 
                         height:300,
                         width:300,
                         marginLeft: "10px"

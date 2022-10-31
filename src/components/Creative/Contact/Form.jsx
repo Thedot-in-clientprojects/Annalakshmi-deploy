@@ -46,7 +46,7 @@ const Form = () => {
   const isSuccessRender = () => {
     if(isSuccess)
     return(
-      <div class="alert alert-primary" role="alert">
+      <div className="alert alert-primary" role="alert">
         Your Booking.. has been done, Our customer care will call you soon!!
     </div>
     )
@@ -160,8 +160,8 @@ const Form = () => {
                   <div className="form-group">
                     {/* <input id="form_subject" type="text" name="subject" placeholder="Subject" required="required" onChange={handleChange} value={formData.subject} /> */}
                     {/* <Calendar onChange={onChange} value={value} /> */}
-                    <label for="birthday">Booking Date:</label>
-<input value={date} onChange={(e) => setdate(e.target.value)} type="date" id="booking" name="booking"/> 
+                    <label htmlFor="birthday">Booking Date:</label>
+                  <input value={date} onChange={(e) => setdate(e.target.value)} type="date" id="booking" name="booking"/> 
                   </div>
                   {/* <Calendar onChange={onChange} value={value} /> */}
                 </div>

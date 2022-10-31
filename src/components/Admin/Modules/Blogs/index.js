@@ -172,7 +172,7 @@ function AdminBlogs() {
             Enter Content
         </p>
         <MDBInput type="textarea" label="Material textarea" rows="5" />
-        <label  className="form-label gilroyM" for="customFile" style={{marginTop: "20px"}}>chosse image for blog card</label>
+        <label  className="form-label gilroyM" style={{marginTop: "20px"}}>chosse image for blog card</label>
         <input type="file" className="form-control" id="customFile" onChange={onFileInputChange}/>
         <MDBBtn className='mt-2 gilroyM' onClick={uploadImage}>Upload</MDBBtn>
             <br>
@@ -187,7 +187,7 @@ function AdminBlogs() {
         <div>
             {allBlogs && Object.entries(allBlogs).map((blog, index) => {
                 return(
-                    <div>
+                    <div key={index}>
                         <p className='gilroyM'>
                             {blog[1].title}
                         </p>

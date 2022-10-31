@@ -188,7 +188,7 @@ function AdminMenu() {
                     <select onChange={(e) => setproductCategory(e.target.value)} className="browser-default custom-select">
                     {allCategories && Object.entries(allCategories).map((cate, index) => {
                       return(
-                    <option value={cate[1].name}>{cate[1].name}</option>
+                    <option key={index} value={cate[1].name}>{cate[1].name}</option>
                       )
                   })}
                   </select>
@@ -209,21 +209,6 @@ function AdminMenu() {
 
     const [editableCategoryName, seteditableCategoryName] = useState('');
     const [isCategoryEditProduct, setisCategoryEditProduct] = useState(0)
-    // const editCategory = (e,id,name) => {
-    //   seteditableCategoryName(name);
-    //   const id = uuidv4();
-
-    //     const db = getDatabase();
-       
-    //     set(ref(db, `category/${id}`), {
-    //         id: id,
-    //         name: categoryName,
-    //       }).then(res => {
-    //         setcategoryName('')
-    //       })
-    // }
-
-    
 
   return (
     <div>
@@ -282,7 +267,7 @@ function AdminMenu() {
                     <select onChange={(e) => setproductCategory(e.target.value)} className="browser-default custom-select gilroyM">
                     {allCategories && Object.entries(allCategories).map((cate, index) => {
                       return(
-                    <option value={cate[1].name}>{cate[1].name}</option>
+                    <option key={index} value={cate[1].name}>{cate[1].name}</option>
                       )
                   })}
                   </select>
@@ -309,7 +294,7 @@ function AdminMenu() {
                     <div style={{display: 'flex',justifyContent: "space-between", alignItems: "center", flexDirection: "row", flexWrap: "wrap"}}>
                         {allCategories && Object.entries(allCategories).map((cate, index) => {
                             return(
-                                <div style={{border: "1px solid #131313", padding: "5px", margin: "5px", borderRadius: "10px"}}>
+                                <div key={index} style={{border: "1px solid #131313", padding: "5px", margin: "5px", borderRadius: "10px"}}>
                                 
                                 <li style={{listStyle: "none"}}>
                                   <h4 className="gilroyM">
@@ -333,7 +318,7 @@ function AdminMenu() {
                     <div style={{display: 'flex', justifyContent: "space-between", alignItems: "center", flexDirection: "row", flexWrap: "wrap",}}>
                         {allProducts && Object.entries(allProducts).map((prod, index) => {
                             return(
-                                <div style={{border: "1px solid #131313", padding: "5px", margin: "5px", borderRadius: "10px"}}>
+                                <div key={index} style={{border: "1px solid #131313", padding: "5px", margin: "5px", borderRadius: "10px"}}>
                                   <h4>
                                 <li style={{listStyle: "none", color: "#131313"}} className="gilroyM">
                                    Name {prod[1].name}
