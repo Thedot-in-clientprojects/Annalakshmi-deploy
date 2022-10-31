@@ -7,7 +7,7 @@ import {
     MDBTabsContent,
     MDBTabsPane
   } from 'mdb-react-ui-kit';
-import Navbar from '../../components/Admin/Shared/NAvbar';
+import Navbar from '../../components/Admin/Shared/Navbar';
 import AdminMenu from './menu';
 import AdminBlogs from '../../components/Admin/Modules/Blogs';
 import AdminBookings from '../../components/Admin/Modules/Booking';
