@@ -24,7 +24,7 @@ const Footer = () => {
                   <span className="icon main-color fz-22 pe-7s-map-marker"></span>
                 </div>
                 <div className="cont-flex">
-                  <span className="fz-16 line-height-30">5th Avenue, Ohio Drive Ashburn, VA 20147</span>
+                  <span className="fz-16 line-height-30">106, Race Course Rd, Gopalapuram, Coimbatore, Tamil Nadu 641018</span>
                 </div>
               </div>
             </div>
@@ -37,7 +37,7 @@ const Footer = () => {
                 </div>
                 <div className="cont-flex">
                   <h6 className="mb-10">Email Us :</h6>
-                  <span className="fz-16"><a href="#0">Info-Support@Gmail.com</a></span>
+                  <span className="fz-16"><a href="#0">annalakshmihospitality@gmail.com</a></span>
                 </div>
               </div>
             </div>
@@ -49,7 +49,7 @@ const Footer = () => {
                   <span>Make a Reservation</span>
                 </a>
               </Link>
-              <h6 className="main-color mt-20">+1 840 841 25 69</h6>
+              <h6 className="main-color mt-20">+91 9843021844</h6>
             </div>
           </div>
         </div>
@@ -60,28 +60,28 @@ const Footer = () => {
           <div className="row">
             <div className="col-lg-6">
               <div className="horizontal-link fz-13">
-                <ul className="rest">
+                {/* <ul className="rest">
                   <li className="mr-30">
-                    <Link href="/services-business">
+                    <Link href="">
                       <a>Privacy policy</a>
                     </Link>
                   </li>
                   <li className="mr-30">
-                    <Link href="/services-business">
+                    <Link href="">
                       <a>Legal notice</a>
                     </Link>
                   </li>
                   <li>
-                    <Link href="/services-business">
+                    <Link href="">
                       <a>Terms of service</a>
                     </Link>
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
             <div className="col-lg-6">
               <div className="copyrights d-flex justify-content-end">
-                <p className="fz-13">© 2022 Ravo is Proudly Powered by <span className="underline"><a href="https://themeforest.net/user/themescamp" rel="noreferrer" target="_blank" className="main-color">ThemesCamp</a></span></p>
+                <p className="fz-13">© 2022 Annalakshmi is Proudly Powered by <span className="underline"><a href="https://thedottech.in" rel="noreferrer" target="_blank" className="main-color">theDot Tech</a></span></p>
               </div>
             </div>
           </div>
