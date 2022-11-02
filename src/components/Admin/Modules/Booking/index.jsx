@@ -7,7 +7,7 @@ import {
     uploadBytes,
     getDownloadURL 
 } from "firebase/storage";
-import { ref, runTransaction, getDatabase, set , onValue , get, onChildAdded, onChildChanged, onChildRemoved  } from 'firebase/database'
+import { ref, runTransaction, getDatabase, set , onValue , get, onChildAdded, onChildChanged, onChildRemoved, orderByChild  } from 'firebase/database'
 import { doc, onSnapshot, collection, query, where } from "firebase/firestore";
 import { realDB } from '../../../../lib/initFirebase';
 import Link from 'next/link'
@@ -22,6 +22,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import dayjs from 'dayjs';
 
 
 function AdminBookings() {
@@ -40,22 +41,29 @@ const getAllBookingsHere = () => {
 const [getAllReservations, setgetAllReservations] = useState([]);
 const getAllReservationsHere = () => {
     const db = getDatabase();
+    let reservation_list = [];
     const reservation = ref(db, 'reservation/');
     onValue(reservation, (snapshot) => {
         const data = snapshot.val();
-        setgetAllReservations(data);
+        Object.entries(data).map((res, index) => {
+          reservation_list.push(res)
+        })
+        setgetAllReservations(reservation_list);
       });
 }
+
+const [resReRender, setResReRedner] = useState(false);
 
 useEffect(() => {
     getAllBookingsHere()
     getAllReservationsHere()
-}, [])
+}, [resReRender])
 
 
 
 const resMoveToTodayProcess = (e, res) => {
     e.preventDefault();
+    setResReRedner(!resReRender)
     const db = getDatabase();
     console.log(res.userId);
     const userId = res.userId;
@@ -79,6 +87,7 @@ const resMoveToTodayProcess = (e, res) => {
 
 const resMoveToTodayAccepted = (e, res) => {
     e.preventDefault();
+    setResReRedner(!resReRender)
     const db = getDatabase();
     console.log(res.userId);
     const userId = res.userId;
@@ -102,6 +111,7 @@ const resMoveToTodayAccepted = (e, res) => {
 
 const resMoveBackToAccept = (e, res) => {
     e.preventDefault();
+    setResReRedner(!resReRender)
     const db = getDatabase();
     console.log(res.userId);
     const userId = res.userId;
@@ -134,6 +144,7 @@ const resMoveBackToAccept = (e, res) => {
 
 const resMoveToTodayDone = (e, res) => {
     e.preventDefault();
+    setResReRedner(!resReRender)
     const db = getDatabase();
     const userId = res.userId;
     const name = res.name
@@ -156,6 +167,7 @@ const resMoveToTodayDone = (e, res) => {
 
 const resMoveBackToProcess = (e, res) => {
     e.preventDefault();
+    setResReRedner(!resReRender)
     const db = getDatabase();
     const userId = res.userId;
     const name = res.name
@@ -177,6 +189,7 @@ const resMoveBackToProcess = (e, res) => {
 
 const resMoveBackToNew = (e, res) => {
     e.preventDefault();
+    setResReRedner(!resReRender)
     const db = getDatabase();
     const userId = res.userId;
     const name = res.name
@@ -234,6 +247,7 @@ const resMoveToRejected = (e, res) => {
 
 const resBookingCancel = (e, res) => {
     e.preventDefault();
+    setResReRedner(!resReRender)
     const db = getDatabase();
     const userId = res.userId;
     const name = res.name
@@ -256,6 +270,7 @@ const resBookingCancel = (e, res) => {
 
 const resBookingToComplete = (e, res) => {
     e.preventDefault();
+    setResReRedner(!resReRender)
     const db = getDatabase();
     const userId = res.userId;
     const name = res.name
@@ -280,7 +295,34 @@ const resBookingToComplete = (e, res) => {
 const [value, onChange] = useState(new Date());
 
 const calendarDate = (e) => {
-    console.log("Date - ", e);
+    console.log("Date - ", dayjs(e).format('DD/MM/YYYY'));
+    let formatDate = dayjs(e).format('DD/MM/YYYY');
+    const db = getDatabase();
+    const reservation = ref(db, `reservation/`)
+    let reservation_per_date = []
+    onValue(reservation, (snapshot) => {
+        const data = snapshot.val();
+        console.log("Reservation By Date -> ", data)
+        Object.entries(data).map((res, index) => {
+              console.log("res -> ", res[1])
+              if(res[1].date === formatDate){
+                reservation_per_date.push(res);
+              }
+        })
+      });
+    console.log("All Reservation Based on Date -> ", reservation_per_date);
+    // const res_reservation = reservation.orderByChild('date').equalTo(formatDate)
+    // res_reservation.on("value", function(snapshot) {
+    //     console.log("Date Per Reservation -> ", snapshot.val())
+    // })  
+    // onValue(reservation, (snapshot) => {
+    //     const data = snapshot.val();
+    //     console.log("Reservation By Date -> ", data)
+    //     setgetAllReservations(data);
+    //   });
+
+
+    // setgetAllReservations
 }
 
 const [currentTime, setcurrentTime] = useState(new Date().getHours());
@@ -323,7 +365,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
             Incoming Bookings
         </h4>
            <div>
-                {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
+                {getAllReservations && getAllReservations.map((res, index) => {
                     if(res[1].status === 'New')
                     return(
                         <Card key={index} sx={{ minWidth: 275 }} style={res[1].session != 'Lunch' ? {
@@ -366,6 +408,9 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                           </Typography>
                         </CardContent>
                         <CardActions>
+                          {
+                            console.log("Incoming Reservations - ", res)
+                          }
                           <Button variant="contained" style={{ backgroundColor:'#009005' }} onClick={(e) => resMoveToTodayAccepted(e, res[1])} size="small">Accept</Button>
                           <Button variant="contained" style={{ backgroundColor:'#F8EB00', color:'#000' }} onClick={(e) => resMoveToTodayDone(e, res[1])} size="small">Hold</Button>
                           <Button variant="contained" style={{ backgroundColor:'#F80000', color:'#FFF' }}  size="small">Rejected</Button>
@@ -391,7 +436,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
             Accepted Bookings
         </h4>
           <div>
-                {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
+                {getAllReservations && getAllReservations.map((res, index) => {
                     if(res[1].status === 'Accept')
                     return(
                         <Card  key={index} sx={{ minWidth: 275 }} style={{
@@ -452,7 +497,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
             On Process Bookings
         </h4>
           <div>
-                {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
+                {getAllReservations && getAllReservations.map((res, index) => {
                     if(res[1].status === 'Process')
                     return(
                         <Card key={index} sx={{ minWidth: 275 }} style={{
@@ -516,7 +561,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
             Done Bookings
         </h4>
           <div>
-                {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
+                {getAllReservations && getAllReservations.map((res, index) => {
                     if(res[1].status === 'Done')
                     return(
                         <Card key={index} sx={{ minWidth: 275 }} style={{
@@ -582,7 +627,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
          Bookings Cancelled
         </h4>
         <div>
-        {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
+        {getAllReservations && getAllReservations.map((res, index) => {
                     if(res[1].status === 'Canceled')
                     return(
                         <Card sx={{ minWidth: 275 }} style={{
@@ -642,7 +687,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
          Bookings Completed
         </h4>
         <div>
-        {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
+        {getAllReservations && getAllReservations.map((res, index) => {
                     if(res[1].status === 'Complete')
                     return(
                         <Card key={index} sx={{ minWidth: 275 }} style={{
@@ -702,7 +747,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
          Bookings on Hold
         </h4>
         <div>
-        {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
+        {getAllReservations && getAllReservations.map((res, index) => {
                     if(res[1].status === 'Hold')
                     return(
                         <Card key={index} sx={{ minWidth: 275 }} style={{
@@ -762,7 +807,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
          Bookings on Rejected
         </h4>
         <div>
-        {getAllReservations && Object.entries(getAllReservations).map((res, index) => {
+        {getAllReservations && getAllReservations.map((res, index) => {
                     if(res[1].status === 'Rejected')
                     return(
                         <Card key={index} sx={{ minWidth: 275 }} style={{
