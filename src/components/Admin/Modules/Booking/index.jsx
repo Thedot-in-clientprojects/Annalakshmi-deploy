@@ -39,6 +39,7 @@ const getAllBookingsHere = () => {
 }
 
 const [getAllReservations, setgetAllReservations] = useState([]);
+const [todaysTotalCount, settodaysTotalCount] = useState(0);
 const getAllReservationsHere = () => {
     const db = getDatabase();
     let reservation_list = [];
@@ -300,6 +301,7 @@ const calendarDate = (e) => {
     const db = getDatabase();
     const reservation = ref(db, `reservation/`)
     let reservation_per_date = []
+    let reservation_counter = 0;
     onValue(reservation, (snapshot) => {
         const data = snapshot.val();
         console.log("Reservation By Date -> ", data)
@@ -307,10 +309,13 @@ const calendarDate = (e) => {
               console.log("res -> ", res[1])
               if(res[1].date === formatDate){
                 reservation_per_date.push(res);
+                reservation_counter = reservation_counter + 1;
               }
         })
       });
     console.log("All Reservation Based on Date -> ", reservation_per_date);
+    setgetAllReservations(reservation_per_date);
+    settodaysTotalCount(reservation_counter);
     // const res_reservation = reservation.orderByChild('date').equalTo(formatDate)
     // res_reservation.on("value", function(snapshot) {
     //     console.log("Date Per Reservation -> ", snapshot.val())
@@ -330,6 +335,8 @@ const [currentDate, setcurrentDate] = useState(new Date().getDate());
 const [currentMonth, setcurrentMonth] = useState(new Date().getMonth());
 const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
 
+
+
   return (
     <div>
         <h4 style={{
@@ -340,7 +347,13 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
             fontWeight: '800'
         }}>
             Admin Booking <span>
-                
+            <Button variant="contained">Reset All</Button>
+            <h3 style={{
+              textAlign: 'center',
+              fontWeight:'600'
+            }}>
+              {todaysTotalCount}
+            </h3>
             </span>
         </h4>
         <div style={{
@@ -362,7 +375,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
             color: '#000',
             fontWeight: '600'
         }}>
-            Incoming Bookings
+            Incoming Bookings 
         </h4>
            <div>
                 {getAllReservations && getAllReservations.map((res, index) => {
