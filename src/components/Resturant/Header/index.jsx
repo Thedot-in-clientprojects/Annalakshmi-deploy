@@ -169,6 +169,49 @@ useEffect(() => {
 // ******************************************
 
 
+
+// *? *****************************************************
+
+
+
+
+const [getAllReservations, setgetAllReservations] = useState([]);
+const [todaysTotalCount, settodaysTotalCount] = useState(0);
+const getAllReservationsHere = () => {
+    const db = getDatabase();
+    let reservation_per_date = [];
+    const reservation = ref(db, 'reservation/');
+    let formatDate = dayjs(new Date()).format('DD/MM/YYYY');
+    let reservation_counter = 0;
+    onValue(reservation, (snapshot) => {
+        const data = snapshot.val();
+        console.log("Reservation By Date -> ", data)
+        Object.entries(data).map((res, index) => {
+              console.log("res -> ", res[1])
+              if(res[1].date === formatDate){
+                reservation_per_date.push(res);
+                reservation_counter = reservation_counter + 1;
+              }
+        })
+      });
+      console.log("Reservation Status - ", reservation_counter);
+      setgetAllReservations(reservation_per_date)
+      settodaysTotalCount(reservation_counter)
+}
+
+
+useEffect(() => {
+  getAllReservationsHere()
+}, [])
+
+
+
+
+
+
+
+// *? ******************************************************
+
   return (
     <header style={{paddingTop: 80}}   data-scroll-index="0">
           <div className='header-main'>
@@ -200,12 +243,24 @@ useEffect(() => {
                               onChange={handleChange}
                               renderInput={(params) => <TextField {...params} />}
                             /> */}
+                            {
+                              todaysTotalCount > 3 ? (
+                                <p>
+                                  Reservation Available
+                                </p>
+                              ) : (
+                                <p>
+                                  Booking Full
+                                </p>
+                              )
+                            }
                             <MobileDatePicker
                           label="Date mobile"
                           inputFormat="MM/DD/YYYY"
                           value={date}
                           onChange={handleChange}
                           minDate={new Date(currentYear, currentMonth, currentDate + 1)}
+                          maxDate={new Date(currentYear, currentMonth, currentDate + 4)}
                           renderInput={(params) => <TextField {...params} />}
                         />
                           </Stack>
