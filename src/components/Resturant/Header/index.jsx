@@ -38,6 +38,8 @@ import 'firebase/storage'
 import Chip from '@mui/material/Chip';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+
 
 const Fade = React.forwardRef(function Fade(props, ref) {
   const { in: open, children, onEnter, onExited, ...other } = props;
@@ -108,8 +110,25 @@ function Header() {
 
   
   const [sessionHere, setsessionHere] = useState('');
+  
+
+  //**   Lunch Section Slot
+
+  const [lunchSessionStatus, setlunchSessionStatus] = useState(false);
+
+  // **
+
+
   const selectSessionHere = (e, session) => {
-    setsessionHere(session)
+    setsessionHere(session);
+    console.log('SESSION -> ', session);
+    if(session === 'Lunch'){
+      console.log('***LUNCH***')
+        setlunchSessionStatus(!lunchSessionStatus);
+    }
+    else if(session === 'Dinner'){
+        setlunchSessionStatus(false);
+    }
   }
 
 
@@ -292,7 +311,33 @@ useEffect(() => {
                           )
                           }
 
-                          
+                          {lunchSessionStatus ? (
+                            <div style={{
+                              marginTop:15
+                            }}>
+                                <Chip icon={<AccessTimeIcon />} label="12:30 PM" variant="outlined" 
+                            
+                            />
+                            <Chip icon={<AccessTimeIcon />} label="1:30 PM" variant="outlined" 
+                            style={{
+                              marginLeft:10
+                            }}
+                            
+                            />
+                            <Chip icon={<AccessTimeIcon />} label="2:30 PM" variant="outlined" 
+                            style={{
+                              marginLeft:10
+                            }}
+                            />
+                                
+                            </div>
+                          ) : (
+                            <div>
+                                
+                            </div>
+                          )
+
+                          }
                           
 
 
@@ -325,10 +370,26 @@ useEffect(() => {
                         </FormControl>
                       </div>
                       {/* <Button type="success" onClick={() => {}}>Submit</Button> */}
-                      <a onClick={formGetUserPhone}>
+                      <div
+                      style={{
+                        flex:1,
+                        justifyContent:'center',
+                        alignItems:'center'
+                      }}
+                      >
+                      <a onClick={formGetUserPhone} style={{
+                        marginTop:15,
+                        height:35,
+                        width:80,
+                        backgroundColor: '#A50000',
+                        justifyContent: 'center',
+                        textAlign: 'center',
+                        borderRadius:8,
+                        color:'#FFFFFF'
+                      }}>
                         Next
                       </a>
-
+                      </div>
                       </Box>
                   </Fade>
 
