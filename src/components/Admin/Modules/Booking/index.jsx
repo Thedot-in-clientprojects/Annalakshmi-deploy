@@ -40,6 +40,7 @@ const getAllBookingsHere = () => {
 
 const [getAllReservations, setgetAllReservations] = useState([]);
 const [todaysTotalCount, settodaysTotalCount] = useState(0);
+
 const getAllReservationsHere = () => {
     const db = getDatabase();
     let reservation_list = [];
@@ -47,7 +48,9 @@ const getAllReservationsHere = () => {
     onValue(reservation, (snapshot) => {
         const data = snapshot.val();
         Object.entries(data).map((res, index) => {
-          reservation_list.push(res)
+          if(res[1].date === dayjs(new Date()).format('DD/MM/YYYY')){
+            reservation_list.push(res)
+          }
         })
         setgetAllReservations(reservation_list);
       });
@@ -73,7 +76,8 @@ const resMoveToTodayProcess = (e, res) => {
     const no = res.no
     const date = res.date
     const session = res.session
-    const status = res.status
+    const status = res.
+    cont
     set(ref(db, `/reservation/${res.userId}`), {
         userId: userId,
         name: name,
@@ -98,6 +102,7 @@ const resMoveToTodayAccepted = (e, res) => {
     const date = res.date
     const session = res.session
     const status = res.status
+    const lunchSlot = res.lunchSlot
     set(ref(db, `/reservation/${res.userId}`), {
         userId: userId,
         name: name,
@@ -105,7 +110,8 @@ const resMoveToTodayAccepted = (e, res) => {
         phone: phone,
         date: date,
         session: session,
-        status: 'Accept'
+        status: 'Accept',
+        lunchSlot: lunchSlot
       }).then(res => {
       })
 }
@@ -122,6 +128,7 @@ const resMoveBackToAccept = (e, res) => {
     const date = res.date
     const session = res.session
     const status = res.status
+    const lunchSlot = res.lunchSlot
     set(ref(db, `/reservation/${res.userId}`), {
         userId: userId,
         name: name,
@@ -129,7 +136,8 @@ const resMoveBackToAccept = (e, res) => {
         phone: phone,
         date: date,
         session: session,
-        status: 'Accept'
+        status: 'Accept',
+        lunchSlot: lunchSlot
       }).then(res => {
       })
 }
@@ -153,6 +161,8 @@ const resMoveToTodayDone = (e, res) => {
     const no = res.no
     const date = res.date
     const session = res.session
+    const status = res.status
+    const lunchSlot = res.lunchSlot
     console.log(res)
     set(ref(db, `/reservation/${res.userId}`), {
         userId: userId,
@@ -161,7 +171,8 @@ const resMoveToTodayDone = (e, res) => {
         phone: phone,
         date: date,
         session: session,
-        status: 'Done'
+        status: 'Done',
+        lunchSlot: lunchSlot
       }).then(res => {
       })
 }
@@ -176,6 +187,8 @@ const resMoveBackToProcess = (e, res) => {
     const no = res.no
     const date = res.date
     const session = res.session
+    const status = res.status
+    const lunchSlot = res.lunchSlot
     set(ref(db, `/reservation/${res.userId}`), {
         userId: userId,
         name: name,
@@ -183,7 +196,8 @@ const resMoveBackToProcess = (e, res) => {
         phone: phone,
         date: date,
         session: session,
-        status: 'Process'
+        status: 'Process',
+        lunchSlot: lunchSlot
       }).then(res => {
       })
 }
@@ -198,6 +212,8 @@ const resMoveBackToNew = (e, res) => {
     const no = res.no
     const date = res.date
     const session = res.session
+    const status = res.status
+    const lunchSlot = res.lunchSlot
     set(ref(db, `/reservation/${res.userId}`), {
         userId: userId,
         name: name,
@@ -205,7 +221,8 @@ const resMoveBackToNew = (e, res) => {
         phone: phone,
         date: date,
         session: session,
-        status: 'New'
+        status: 'New',
+        lunchSlot: lunchSlot
       }).then(res => {
        
       })
@@ -213,16 +230,25 @@ const resMoveBackToNew = (e, res) => {
 
 const resMoveToHold = (e, res) => {
     e.preventDefault();
+    setResReRedner(!resReRender)
     const db = getDatabase();
-
-    set(ref(db, `user/reservation/${res[0]}`), {
-        userId: res[0],
-        name: res[1].name,
-        no: res[1].noMembers,
-        phone: res[1].phone,
-        date: res[1].date,
-        session: res[1].session,
-        status: 'Hold'
+    const userId = res.userId;
+    const name = res.name
+    const phone = res.phone
+    const no = res.no
+    const date = res.date
+    const session = res.session
+    const status = res.status
+    const lunchSlot = res.lunchSlot
+    set(ref(db, `/reservation/${res.userId}`), {
+      userId: userId,
+      name: name,
+      no: no,
+      phone: phone,
+      date: date,
+      session: session,
+      status: 'Hold',
+      lunchSlot: lunchSlot
       }).then(res => {
        
       })
@@ -240,7 +266,8 @@ const resMoveToRejected = (e, res) => {
         phone: res[1].phone,
         date: res[1].date,
         session: res[1].session,
-        status: 'Rejected'
+        status: 'Rejected',
+        lunchSlot: res[1].lunchSlot
       }).then(res => {
        
       })
@@ -249,13 +276,14 @@ const resMoveToRejected = (e, res) => {
 const resBookingCancel = (e, res) => {
     e.preventDefault();
     setResReRedner(!resReRender)
-    const db = getDatabase();
     const userId = res.userId;
     const name = res.name
     const phone = res.phone
     const no = res.no
     const date = res.date
     const session = res.session
+    const status = res.status
+    const lunchSlot = res.lunchSlot
     set(ref(db, `/reservation/${res.userId}`), {
         userId: userId,
         name: name,
@@ -263,7 +291,8 @@ const resBookingCancel = (e, res) => {
         phone: phone,
         date: date,
         session: session,
-        status: 'Canceled'
+        status: 'Canceled',
+        lunchSlot: lunchSlot
       }).then(res => {
        
       })
@@ -272,13 +301,14 @@ const resBookingCancel = (e, res) => {
 const resBookingToComplete = (e, res) => {
     e.preventDefault();
     setResReRedner(!resReRender)
-    const db = getDatabase();
     const userId = res.userId;
     const name = res.name
     const phone = res.phone
     const no = res.no
     const date = res.date
     const session = res.session
+    const status = res.status
+    const lunchSlot = res.lunchSlot
     set(ref(db, `/reservation/${res.userId}`), {
         userId: userId,
         name: name,
@@ -286,7 +316,21 @@ const resBookingToComplete = (e, res) => {
         phone: phone,
         date: date,
         session: session,
-        status: 'Complete'
+        status: 'Complete',
+        lunchSlot: lunchSlot
+      }).then(res => {
+       
+      })
+}
+
+const resBookingToCompletedDone = (e, res) => {
+    e.preventDefault();
+    setResReRedner(!resReRender)
+    const db = getDatabase();
+    const userId = res.userId;
+
+    set(ref(db, `/reservation/${res.userId}`), {
+  
       }).then(res => {
        
       })
@@ -336,6 +380,20 @@ const [currentMonth, setcurrentMonth] = useState(new Date().getMonth());
 const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
 
 
+const allReservationHereSlotDisplay = (e) => {
+    e.preventDefault();
+    const db = getDatabase();
+    let reservation_list = [];
+    const reservation = ref(db, 'reservation/');
+    onValue(reservation, (snapshot) => {
+        const data = snapshot.val();
+        Object.entries(data).map((res, index) => {
+            reservation_list.push(res)
+        });
+        setgetAllReservations(reservation_list);
+      });
+}
+
 
   return (
     <div>
@@ -347,7 +405,7 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
             fontWeight: '800'
         }}>
             Admin Booking <span>
-            <Button variant="contained">Reset All</Button>
+            <Button variant="contained" onClick={allReservationHereSlotDisplay}>Show All</Button>
             <h3 style={{
               textAlign: 'center',
               fontWeight:'600'
@@ -394,7 +452,12 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                           <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                             New User
                           </Typography>
-                          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom
+                          style={{
+                            fontWeight:'600',
+                            fontSize:18
+                          }}
+                          >
                             Session - {res[1].session}
                           </Typography>
                           <Typography variant="h5" component="div">
@@ -420,17 +483,38 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                             <br />
                           </Typography>
                         </CardContent>
+                        <p style={{
+                                fontSize:17,
+                                fontWeight:'700',
+                                marginLeft:15
+                              }}>
+                                {
+                                  res[1].lunchSlot
+                                } 🌞
+                              </p>
                         <CardActions>
                           {
                             console.log("Incoming Reservations - ", res)
                           }
+                          
                           <Button variant="contained" style={{ backgroundColor:'#009005' }} onClick={(e) => resMoveToTodayAccepted(e, res[1])} size="small">Accept</Button>
-                          <Button variant="contained" style={{ backgroundColor:'#F8EB00', color:'#000' }} onClick={(e) => resMoveToTodayDone(e, res[1])} size="small">Hold</Button>
+                          <Button variant="contained" style={{ backgroundColor:'#F8EB00', color:'#000' }} onClick={(e) => resMoveToHold(e, res[1])} size="small">Hold</Button>
                           <Button variant="contained" style={{ backgroundColor:'#F80000', color:'#FFF' }}  size="small">Rejected</Button>
                         </CardActions>
                         <CardActions>
                             <FormControl fullWidth>
-                            <Button variant="contained" style={{ backgroundColor:'#2B1CFF' }} onClick={(e) => resBookingCancel(e, res[1])} size="small">Called</Button>
+                              
+                              <p
+                              style={{
+                                fontSize:17,
+                                fontWeight:'700'
+                              }}
+                              >
+                               📞 {
+                                  res[1].phone
+                                }
+                              </p>
+                            <Button variant="contained" style={{ backgroundColor:'#2B1CFF' }} onClick={(e) => resBookingCancel(e, res[1])} size="small">Call</Button>
                             </FormControl>
                         </CardActions>
                       </Card>
@@ -474,7 +558,8 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                           <Typography sx={{ mb: 1.5 }} color="text.secondary">
                           Members <span style={{
                             fontStyle:'normal',
-                            fontWeight:'800'
+                            fontWeight:'800',
+                            color:'#000000'
                           }}>{
                                  res[1].no
                             }</span>
@@ -484,6 +569,15 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                             <br />
                           </Typography>
                         </CardContent>
+                        <p style={{
+                                fontSize:17,
+                                fontWeight:'700',
+                                marginLeft:15
+                              }}>
+                                {
+                                  res[1].lunchSlot
+                                } 🌞
+                              </p>
                         <CardActions>
                           <Button variant="contained" style={{ backgroundColor:'#009005' }} onClick={(e) => resMoveToTodayProcess(e, res[1])} size="small">Booking To Process</Button>
                           <Button variant="contained" style={{ backgroundColor:'#F8EB00', color:'#000' }} size="small">Hold</Button>
@@ -491,6 +585,16 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                         </CardActions>
                         <CardActions>
                             <FormControl fullWidth>
+                            <p
+                              style={{
+                                fontSize:17,
+                                fontWeight:'700'
+                              }}
+                              >
+                               📞 {
+                                  res[1].phone
+                                }
+                              </p>
                             <Button variant="contained" style={{ backgroundColor:'#2B1CFF' }} onClick={(e) => resMoveBackToNew(e, res[1])} size="small">Back to New</Button>
                             </FormControl>
                         </CardActions>
@@ -545,6 +649,15 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                             <br />
                           </Typography>
                         </CardContent>
+                        <p style={{
+                                fontSize:17,
+                                fontWeight:'700',
+                                marginLeft:15
+                              }}>
+                                {
+                                  res[1].lunchSlot
+                                } 🌞
+                              </p>
                         <CardActions>
                         <FormControl fullWidth>
                           <Button variant="contained" style={{ backgroundColor:'#009005' }} size="small" onClick={(e) => resMoveToTodayDone(e, res[1])}>Done</Button>
@@ -609,6 +722,15 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                             <br />
                           </Typography>
                         </CardContent>
+                        <p style={{
+                                fontSize:17,
+                                fontWeight:'700',
+                                marginLeft:15
+                              }}>
+                                {
+                                  res[1].lunchSlot
+                                } 🌞
+                              </p>
                         <CardActions>
                           <Button variant="contained" style={{ backgroundColor:'#009005' }} size="small" onClick={(e) => resMoveBackToProcess(e, res[1])}>Back to Process</Button>
                           {/* <Button variant="contained" style={{ backgroundColor:'#F8EB00', color:'#000' }} size="small">Hold</Button>
@@ -616,6 +738,16 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                         </CardActions>
                         <CardActions>
                             <FormControl fullWidth>
+                            <p
+                              style={{
+                                fontSize:17,
+                                fontWeight:'700'
+                              }}
+                              >
+                               📞 {
+                                  res[1].phone
+                                }
+                              </p>
                             <Button variant="contained" style={{ backgroundColor:'#2B1CFF' }} onClick={(e) => resBookingToComplete(e, res[1])} size="small">Complete</Button>
                             </FormControl>
                         </CardActions>
@@ -675,13 +807,32 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                             <br />
                           </Typography>
                         </CardContent>
+                        <p style={{
+                                fontSize:17,
+                                fontWeight:'700',
+                                marginLeft:15
+                              }}>
+                                {
+                                  res[1].lunchSlot
+                                } 🌞
+                              </p>
                         <CardActions>
-                          <Button variant="contained" style={{ backgroundColor:'#009005' }} size="small">Accept</Button>
-                          <Button variant="contained" style={{ backgroundColor:'#F8EB00', color:'#000' }} size="small">Hold</Button>
-                          <Button variant="contained" style={{ backgroundColor:'#F80000', color:'#FFF' }} size="small">Rejected</Button>
+                          <Button variant="contained" style={{ backgroundColor:'#009005' }} size="small" onClick={(e) => resMoveBackToNew(e, res[1])}>Back To Accept</Button>
+                          <Button variant="contained" style={{ backgroundColor:'#F8EB00', color:'#000' }} size="small" onClick={(e) => resMoveToHold(e, res[1])}>Hold</Button>
+                          <Button variant="contained" style={{ backgroundColor:'#F80000', color:'#FFF' }} size="small" onClick={(e) => resMoveToRejected(e, res[1])}>Rejected</Button>
                         </CardActions>
                         <CardActions>
                             <FormControl fullWidth>
+                            <p
+                              style={{
+                                fontSize:17,
+                                fontWeight:'700'
+                              }}
+                              >
+                               📞 {
+                                  res[1].phone
+                                }
+                              </p>
                             <Button variant="contained" style={{ backgroundColor:'#2B1CFF' }} size="small">Called</Button>
                             </FormControl>
                         </CardActions>
@@ -735,13 +886,32 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                             <br />
                           </Typography>
                         </CardContent>
+                        <p style={{
+                                fontSize:17,
+                                fontWeight:'700',
+                                marginLeft:15
+                              }}>
+                                {
+                                  res[1].lunchSlot
+                                } 🌞
+                              </p>
                         <CardActions>
-                          <Button variant="contained" style={{ backgroundColor:'#009005' }} size="small">Accept</Button>
-                          <Button variant="contained" style={{ backgroundColor:'#F8EB00', color:'#000' }} size="small">Hold</Button>
-                          <Button variant="contained" style={{ backgroundColor:'#F80000', color:'#FFF' }} size="small">Rejected</Button>
+                          <Button variant="contained" style={{ backgroundColor:'#FF0C34' }} onClick={(e) => resBookingToCompletedDone(e, res[1])} size="small">Booking Complete</Button>
+                          {/* <Button variant="contained" style={{ backgroundColor:'#F8EB00', color:'#000' }} size="small">Hold</Button> */}
+                          {/* <Button variant="contained" style={{ backgroundColor:'#F80000', color:'#FFF' }} size="small">Rejected</Button> */}
                         </CardActions>
                         <CardActions>
                             <FormControl fullWidth>
+                            <p
+                              style={{
+                                fontSize:17,
+                                fontWeight:'700'
+                              }}
+                              >
+                               📞 {
+                                  res[1].phone
+                                }
+                              </p>
                             <Button variant="contained" style={{ backgroundColor:'#2B1CFF' }} size="small">Called</Button>
                             </FormControl>
                         </CardActions>
@@ -796,12 +966,31 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                           </Typography>
                         </CardContent>
                         <CardActions>
-                          <Button variant="contained" style={{ backgroundColor:'#009005' }} size="small">Accept</Button>
-                          <Button variant="contained" style={{ backgroundColor:'#F8EB00', color:'#000' }} size="small">Hold</Button>
-                          <Button variant="contained" style={{ backgroundColor:'#F80000', color:'#FFF' }} size="small">Rejected</Button>
+                          <Button variant="contained" style={{ backgroundColor:'#009005' }} size="small" onClick={(e) => resMoveBackToAccept(e, res[1])}>Back To Accept</Button>
+                          {/* <Button variant="contained" style={{ backgroundColor:'#F8EB00', color:'#000' }} size="small">Hold</Button> */}
+                          <Button variant="contained" style={{ backgroundColor:'#F80000', color:'#FFF' }} size="small" onClick={(e) => resMoveBackToAccept(e, res[1])}>Delete</Button>
                         </CardActions>
+                        <p style={{
+                                fontSize:17,  
+                                fontWeight:'700',
+                                marginLeft:15
+                              }}>
+                                {
+                                  res[1].lunchSlot
+                                } 🌞
+                              </p>
                         <CardActions>
                             <FormControl fullWidth>
+                            <p
+                              style={{
+                                fontSize:17,
+                                fontWeight:'700'
+                              }}
+                              >
+                               📞 {
+                                  res[1].phone
+                                }
+                              </p>
                             <Button variant="contained" style={{ backgroundColor:'#2B1CFF' }} size="small">Called</Button>
                             </FormControl>
                         </CardActions>
@@ -855,6 +1044,15 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                             <br />
                           </Typography>
                         </CardContent>
+                        <p style={{
+                                fontSize:17,
+                                fontWeight:'700',
+                                marginLeft:15
+                              }}>
+                                {
+                                  res[1].lunchSlot
+                                } 🌞
+                              </p>
                         <CardActions>
                           <Button variant="contained" style={{ backgroundColor:'#009005' }} size="small">Accept</Button>
                           <Button variant="contained" style={{ backgroundColor:'#F8EB00', color:'#000' }} size="small">Hold</Button>
@@ -862,6 +1060,16 @@ const [currentYear, setcurrentYear] = useState(new Date().getFullYear())
                         </CardActions>
                         <CardActions>
                             <FormControl fullWidth>
+                            <p
+                              style={{
+                                fontSize:17,
+                                fontWeight:'700'
+                              }}
+                              >
+                               📞 {
+                                  res[1].phone
+                                }
+                              </p>
                             <Button variant="contained" style={{ backgroundColor:'#2B1CFF' }} size="small">Called</Button>
                             </FormControl>
                         </CardActions>

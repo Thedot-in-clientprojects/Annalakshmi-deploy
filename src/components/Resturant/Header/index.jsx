@@ -115,8 +115,38 @@ function Header() {
   //**   Lunch Section Slot
 
   const [lunchSessionStatus, setlunchSessionStatus] = useState(false);
-
+  const [dinnerSessionStatus, setdinnerSessionStatus] = useState(false);
+  const [lunchTimingSessionStatus12, setlunchTimingSessionStatus12] = useState(false);
+  const [lunchTimingSessionStatus01, setlunchTimingSessionStatus01] = useState(false);
+  const [lunchTimingSessionStatus02, setlunchTimingSessionStatus02] = useState(false);
   // **
+
+  // *? Lunch Session Picker
+
+const [lunchSessionSlot, setlunchSessionSlot] = useState('');
+const luchSessionPicker = (e, lunchSession) => {
+      e.preventDefault();
+      setlunchSessionSlot(lunchSession);
+      if(lunchSession === '12:30 PM'){
+          setlunchTimingSessionStatus12(true);
+          setlunchTimingSessionStatus01(false);
+          setlunchTimingSessionStatus02(false);
+      }
+      else if(lunchSession === '1:30 PM'){
+          setlunchTimingSessionStatus01(true);
+          setlunchTimingSessionStatus12(false);
+          setlunchTimingSessionStatus02(false);
+      }
+      else if(lunchSession === '2:30 PM'){
+          setlunchTimingSessionStatus01(false);
+          setlunchTimingSessionStatus02(true);
+          setlunchTimingSessionStatus12(false);
+
+        }
+} 
+
+// *?
+
 
 
   const selectSessionHere = (e, session) => {
@@ -124,10 +154,12 @@ function Header() {
     console.log('SESSION -> ', session);
     if(session === 'Lunch'){
       console.log('***LUNCH***')
-        setlunchSessionStatus(!lunchSessionStatus);
+      setdinnerSessionStatus(false);
+      setlunchSessionStatus(!lunchSessionStatus);
     }
     else if(session === 'Dinner'){
-        setlunchSessionStatus(false);
+      setdinnerSessionStatus(!dinnerSessionStatus);
+      setlunchSessionStatus(false);
     }
   }
 
@@ -147,7 +179,8 @@ function Header() {
         phone: phone,
         date: dayjs(date.$d).format('DD/MM/YYYY'),
         session: sessionHere,
-        status: 'New'
+        status: 'New',
+        lunchSlot: lunchSessionSlot
       }).then(res => {
         setname('')
         setphone('')
@@ -228,7 +261,6 @@ useEffect(() => {
 
 
 
-
 // *? ******************************************************
 
   return (
@@ -287,25 +319,46 @@ useEffect(() => {
                         </LocalizationProvider>
 
                         <p style={{fontWeight: "bold", marginBottom: 10}}>Select the Session</p>
-                            
+                        {/* {
+                                  console.log("Current Time and Current Date -> ", currentDate, date, currentTime)
+                                } */}
                         <div>
-                          {currentTime <= 15 ? (
+                          {currentTime <= 15 || currentDate != date.$D  ? (
                                 <>
-                                <Chip icon={<LightModeIcon />} 
+                               
+                                <Chip icon={<LightModeIcon style={lunchSessionStatus ? {
+                                  color:'#FFFFFF'
+                                } : {}}/>} 
                                 // color={sessionHere === 'Lunch' ?  "success" : ""} 
-                                label="Lunch" variant="outlined" style={{
+                                label="Lunch" variant={lunchSessionStatus ? "" : "outlined" } style={lunchSessionStatus ?  {
                                   marginRight:15,
+                                  backgroundColor:'#910000',
+                                  color:'#FFFFFF'
+                                }: {
+                                  marginRight:15
                                 }}
                             onClick={(e) => selectSessionHere(e, 'Lunch')}
 
                                   />
-                                  <Chip icon={<NightsStayIcon />} label="Dinner" variant="outlined" 
-                            // color={sessionHere === 'Dinner' ?  "success" : ""}
+                                  <Chip icon={<NightsStayIcon style={dinnerSessionStatus ? {
+                                  color:'#FFFFFF'
+                                } : {}} />} label="Dinner" 
+                                  variant={dinnerSessionStatus ? "" : "outlined" }
+                                  style={dinnerSessionStatus ?  {
+                                    marginRight:15,
+                                    backgroundColor:'#910000',
+                                    color:'#FFFFFF'
+                                  }: {
+                                    marginRight:15
+                                  }}
+                                  // color={sessionHere === 'Dinner' ?  "success" : ""}
+                            
                             onClick={(e) => selectSessionHere(e, 'Dinner')}
                             />
                             </>
                           )  :  (
-                            <Chip icon={<NightsStayIcon />} label="Dinner" variant="outlined" 
+                            <Chip icon={<NightsStayIcon />} label="Dinner"
+                            variant={dinnerSessionStatus ? "" : "outlined" }
                             onClick={(e) => selectSessionHere(e, 'Dinner')}
                             />
                           )
@@ -315,19 +368,44 @@ useEffect(() => {
                             <div style={{
                               marginTop:15
                             }}>
-                                <Chip icon={<AccessTimeIcon />} label="12:30 PM" variant="outlined" 
+                                <Chip variant={lunchTimingSessionStatus12 ? "" : "outlined" }
+                                  style={lunchTimingSessionStatus12 ?  {
+                                    marginRight:1,
+                                    backgroundColor:'#910000',
+                                    color:'#FFFFFF'
+                                  }: {
+                                    marginRight:15
+                                  }} onClick={(e) => luchSessionPicker(e, '12:30 PM')} icon={<AccessTimeIcon
+                                    style={lunchTimingSessionStatus12 ? {
+                                      color:'#FFFFFF'
+                                    } : {}} 
+                                    />} label="12:30 PM" 
                             
                             />
-                            <Chip icon={<AccessTimeIcon />} label="1:30 PM" variant="outlined" 
-                            style={{
-                              marginLeft:10
-                            }}
+                            <Chip 
+                             style={lunchTimingSessionStatus01 ? {
+                              marginRight:5,
+
+                              backgroundColor:'#910000',
+                              color:'#FFFFFF'
+                            } : {}} 
+                            onClick={(e) => luchSessionPicker(e, '1:30 PM')} icon={<AccessTimeIcon 
+                              style={lunchTimingSessionStatus01 ? {
+                                color:'#FFFFFF'
+                              } : {}}
+                            />} label="1:30 PM" variant="outlined" 
+                            
                             
                             />
-                            <Chip icon={<AccessTimeIcon />} label="2:30 PM" variant="outlined" 
-                            style={{
-                              marginLeft:10
-                            }}
+                            <Chip onClick={(e) => luchSessionPicker(e, '2:30 PM')} icon={<AccessTimeIcon 
+                            style={lunchTimingSessionStatus02 ? {
+                              color:'#FFFFFF'
+                            } : {}}
+                            />} label="2:30 PM" variant="outlined" 
+                              style={lunchTimingSessionStatus02 ? {
+                                backgroundColor:'#910000',
+                                color:'#FFFFFF'
+                              } : {}} 
                             />
                                 
                             </div>

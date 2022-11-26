@@ -56,7 +56,6 @@ const HomeRestaurant = () => {
         <link rel="icon" href="/favicon.ico" />
         <title>Annalakshmi Restaurant</title>
       </Head>
-
       <AppLayout type="restaurant" links={nav_links} navTheme="dark">
         <Header />
         <main className="position-re">
