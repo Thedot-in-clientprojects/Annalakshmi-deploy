@@ -39,6 +39,7 @@ import Chip from '@mui/material/Chip';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import { NoEncryption } from "@mui/icons-material";
 
 
 const Fade = React.forwardRef(function Fade(props, ref) {
@@ -378,16 +379,19 @@ useEffect(() => {
                       }}
                       >
                       <a onClick={formGetUserPhone} style={{
-                        marginTop:15,
-                        height:35,
-                        width:80,
-                        backgroundColor: '#A50000',
-                        justifyContent: 'center',
-                        textAlign: 'center',
-                        borderRadius:8,
-                        color:'#FFFFFF'
+                       
+                        
                       }}>
+                        <button style={{
+                          padding: "8px 35px",
+                          backgroundColor: "#9B1915",
+                          color: "#fff",
+                          marginTop: "1.5rem",
+                          border: "none",
+                          borderRadius: "5px"
+                        }}>
                         Next
+                        </button>
                       </a>
                       </div>
                       </Box>
@@ -421,7 +425,16 @@ useEffect(() => {
                       </div>
                       {/* <Button type="success" onClick={() => {}}>Submit</Button> */}
                       <a onClick={(e) => submitReservation(e)}>
+                      <button style={{
+                          padding: "8px 30px",
+                          backgroundColor: "#9B1915",
+                          color: "#fff",
+                          marginTop: "1.5rem",
+                          border: "none",
+                          borderRadius: "5px"
+                        }}>
                         Reserve
+                        </button>
                       </a>
 
                       </Box>
