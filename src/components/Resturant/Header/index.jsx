@@ -259,7 +259,39 @@ useEffect(() => {
 
 
 
+// ************************ Global Booking Status *****************************
 
+const [bookingStatus, setbookingStatus] = useState(false);
+const [bookingStatusHere, setbookingStatusHere] = useState('');
+
+const getBookingStatusHere = () => {
+  const db = getDatabase();
+  const bookings = ref(db, `/status/booking/`);
+  onValue(bookings, (snapshot) => {
+      const data = snapshot.val();
+      console.log("Status -> ", data)
+      setbookingStatusHere(data.status)
+    })
+}
+
+const getBookingStatusByDateHere = () => { 
+  const db = getDatabase();
+
+  const bookings = ref(db, `/block/booking/date/${dayjs(new Date()).format('DD/MM/YYYY')}`);
+  onValue(bookings, (snapshot) => {
+      const data = snapshot.val();
+      console.log("Booking By Date -> ", data)
+    })
+}
+
+useEffect(() => {
+  getBookingStatusHere()
+  getBookingStatusByDateHere()
+}, [bookingStatus])
+
+
+
+// ****************************************************************************
 
 
 // *? ******************************************************
@@ -271,8 +303,16 @@ useEffect(() => {
               <img className='header-main-img' src="/img/headerimg.png" />
               <h1 className='header-main-title'>A UNIQUE DINING <br /> CONCEPT</h1>
              
-            
+                {bookingStatusHere === 'opened' ? (
                 <button className="header-main-btn" onClick={handleOpen}>Reservation</button>
+
+                ) : (
+                  <h3 className="saman" style={{color: "#9B1915", fontSize: "2rem"}}>
+                  Reservation Closed
+                  </h3>
+                )
+
+                }
                 <Modal
                   aria-labelledby="spring-modal-title"
                   aria-describedby="spring-modal-description"

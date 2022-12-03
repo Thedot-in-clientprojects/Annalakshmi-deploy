@@ -23,6 +23,8 @@ import Button from '@mui/material/Button';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import dayjs from 'dayjs';
+import { v4 as uuidv4 } from 'uuid';
+
 
 
 function AdminBookings() {
@@ -338,9 +340,12 @@ const resBookingToCompletedDone = (e, res) => {
 
 
 const [value, onChange] = useState(new Date());
-
+const [selectedDateWord, setselectedDateWord] = useState('');
+const [selectedDateWordIt, setselectedDateWordIt] = useState('');
 const calendarDate = (e) => {
     console.log("Date - ", dayjs(e).format('DD/MM/YYYY'));
+    setselectedDateWord(dayjs(e).format('DD-MM-YYYY'));
+    setselectedDateWordIt(dayjs(e).format('DD/MM/YYYY'));
     let formatDate = dayjs(e).format('DD/MM/YYYY');
     const db = getDatabase();
     const reservation = ref(db, `reservation/`)
@@ -394,6 +399,85 @@ const allReservationHereSlotDisplay = (e) => {
       });
 }
 
+const [bookingStatus, setbookingStatus] = useState(false);
+// false -> Closed
+// true  -> Open
+const doBookingClose = (e) => {
+      e.preventDefault();
+      setbookingStatus(false);
+      const db = getDatabase();
+      set(ref(db, `/status/booking/`), {
+        status: 'closed'
+        
+      }).then(res => {
+       
+      })
+     
+}
+const doBookingOpen = (e) => {
+      e.preventDefault();
+      setbookingStatus(true);
+      const db = getDatabase();
+      set(ref(db, `/status/booking/`), {
+        status: 'opened'
+        
+      }).then(res => {
+       
+      })
+    }
+
+
+  const getBookingStatusHere = () => {
+    const db = getDatabase();
+    const bookings = ref(db, `/status/booking/`);
+    onValue(bookings, (snapshot) => {
+        const data = snapshot.val();
+        console.log("Status -> ", data)
+        if(data.status === 'opened'){
+            setbookingStatus(true);
+        }
+        else if(data.status === 'closed'){
+            setbookingStatus(false);
+        }
+      })
+  }
+
+  useEffect(() => {
+    getBookingStatusHere();   
+  }, [bookingStatus])
+  
+
+
+  const doBookingThisDateClose = (e) => {
+          e.preventDefault();
+          const db = getDatabase();
+          const id = uuidv4();
+          if(selectedDateWord){
+            set(ref(db, `/block/booking/date/${selectedDateWord}`), {
+              date: selectedDateWord,
+              status: 'closed'
+            }).then(res => {
+             
+            })
+          }
+         
+  }
+
+
+  const doBookingThisDateOpen = (e) => {
+        e.preventDefault();
+        const db = getDatabase();
+        const id = uuidv4();
+          if(selectedDateWord){
+            set(ref(db, `/block/booking/date/${selectedDateWord}`), {
+              date: selectedDateWord,
+              status: 'opened'
+            }).then(res => {
+             
+            })
+          }
+         
+  }
 
   return (
     <div>
@@ -406,6 +490,18 @@ const allReservationHereSlotDisplay = (e) => {
         }}>
             Admin Booking <span>
             <Button variant="contained" onClick={allReservationHereSlotDisplay}>Show All</Button>
+            {bookingStatus ? (
+              <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#C50000'
+              }} onClick={doBookingClose}>Booking Close</Button>
+            ) : (
+              <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#00A455'
+              }} onClick={doBookingOpen}>Booking Open</Button>
+            )
+            }
             <h3 style={{
               textAlign: 'center',
               fontWeight:'600'
@@ -420,8 +516,20 @@ const allReservationHereSlotDisplay = (e) => {
             alignSelf: 'center'
         }}>
         <Calendar 
-            //  minDate={new Date(currentYear, currentMonth, currentDate + 1)}
         onChange={calendarDate} value={value} />
+        <div>
+
+        </div>
+        <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#C50000',
+                marginTop:15
+              }} onClick={doBookingThisDateClose}>Close Booking This Date</Button>
+        <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#45C500',
+                marginTop:15
+              }} onClick={doBookingThisDateOpen}>Open Booking This Date</Button>
         </div>
         <div>
         <Box sx={{ flexGrow: 1 }}>
