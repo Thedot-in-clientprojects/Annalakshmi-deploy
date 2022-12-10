@@ -714,140 +714,199 @@ const doBookingOpen = (e) => {
               <Button variant="contained" style={{
                 marginLeft:10,
                 backgroundColor: '#C50000'
-              }} onClick={doBookingClose}>Booking Close</Button>
+              }} onClick={doBookingClose}>Click to Close Booking</Button>
             ) : (
+              
               <Button variant="contained" style={{
                 marginLeft:10,
                 backgroundColor: '#00A455'
-              }} onClick={doBookingOpen}>Booking Open</Button>
+              }} onClick={doBookingOpen}>Click to Open Booking</Button> 
             )
             }
+            <div style={{display: "flex", backgroundColor: "#fff", marginTop: "30px", justifyContent:"space-between", alignItems: "center", padding: "20px"}}>
             <div>
                 {selectedProductStatus ? (
-                    <p style={{
-                        color:'#EF0000'
-                    }}
-                    >
-                      Please Select the Date
-                    </p>
+                     <div style={{position:"fixed", top: "170px", right: "10px", background: "#fff", padding: "10px 20px", boxShadow: "0 19px 38px #1c1c1c4c, 0 15px 12px #2c2c2c38", borderRadius: "2px", color: "#E26868", zIndex: "10"}}>Please select a date</div>
                 ) : (
-                  null
+                  <div style={{position:"fixed", top: "170px", right: "10px", background: "#fff", padding: "10px 20px", boxShadow: "0 19px 38px #1c1c1c4c, 0 15px 12px #2c2c2c38", borderRadius: "2px", zIndex: "10"}}>{selectedDateWord}</div>
                 )
-
                 }
             </div>
             <h3 style={{
               textAlign: 'center',
-              fontWeight:'600'
+              fontWeight:'600',
             }}>
-              {todaysTotalCount}
+              Total Bookings - {todaysTotalCount}
             </h3>
+            <Calendar 
+              onChange={calendarDate} value={value} style={{color: "#22222"}} />
+              <Button variant="contained" style={{
+                marginTop:15
+              }} onClick={doBookingThisDateClose}>Close Booking This Date</Button>
+        <Button variant="contained" style={{
+                backgroundColor: '#45C500',
+                marginTop:15
+              }} onClick={doBookingThisDateOpen}>Open Booking This Date</Button>
+            </div>
             </span>
+            
         </h4>
+        
+        
         <div style={{
             margin:25,
             justifyContent:'center',
             alignSelf: 'center'
         }}>
-        <Calendar 
-        onChange={calendarDate} value={value} />
+       
+        
         <div>
+          <h4 style={{
+            marginTop: 45,
+            color:'#000000',
+            marginBottom: 45,
+            fontWeight: '800',
+            }}>Booking Slot Status</h4>
           <div style={{
             margin:20,
-            backgroundColor:'#FF8080'
-          }}>
+            display: "grid",
+            justifyContent: "space-between",
+            gridTemplateColumns: "1fr 1fr",
 
-          <p>
-            Status: 12:00 PM {tempSessionTwelve}
+          }}>
+          
+          <div style={{backgroundColor: "#fff", padding: "10px", margin: "10px", borderRadius: "5px"}}>
+          <p style={{ backgroundColor: "#fff", padding: "10px", fontWeight: "800", textAlign: "center"}}>
+            Status: 12:00 PM <span style={{color: "#E26868", fontSize: "20px"}}>{tempSessionTwelve}</span>
           </p>
-          <p>
-            Status: 1:00 PM {tempSessionOne}
-          </p>
-          <p>
-            Status: 2:00 PM {tempSessionTwo}
-          </p>
-          <p>
-            Status: Lunch  {tempLunch}
-          </p>
-          <p>
-            Status: Dinner  {tempDinner}
-          </p>
-          </div>
+          <div>
           {isLoadingHere ? (
             <p>
               Loading ... 
             </p>
           ) : (
-            <div>
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
               <Button variant="contained" style={{
                 marginLeft:10,
                 backgroundColor: '#00C53B',
                 marginTop:15
               }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '12:00 PM', 'opened')}>Open Booking  - 12:00 PM Today</Button>  
-        <Button variant="contained" style={{
+              <Button variant="contained" style={{
                 marginLeft:10,
-                backgroundColor: '#C50000',
+                
                 marginTop:15
               }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '12:00 PM', 'closed')}>Close Booking  - 12:00 PM Today</Button>  
-        <Button variant="contained" style={{
+            </div>
+          )}
+          </div>
+          </div>
+
+          <div style={{backgroundColor: "#fff", padding: "10px", margin: "10px", borderRadius: "5px"}}>
+          <p style={{ backgroundColor: "#fff", padding: "10px", fontWeight: "800", textAlign: "center"}}>
+          Status: 1:00 PM <span style={{color: "#E26868", fontSize: "20px"}}>{tempSessionOne}</span>
+          </p>
+          <div>
+          {isLoadingHere ? (
+            <p>
+              Loading ... 
+            </p>
+          ) : (
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+              <Button variant="contained" style={{
                 marginLeft:10,
                 backgroundColor: '#00C53B',
                 marginTop:15
               }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '1:00 PM', 'opened')}>Open Booking  - 1:00 PM Today</Button>  
-        <Button variant="contained" style={{
+              <Button variant="contained" style={{
                 marginLeft:10,
-                backgroundColor: '#C50000',
                 marginTop:15
               }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '1:00 PM', 'closed')}>Close Booking  - 1:00 PM Today</Button>  
-        <Button variant="contained" style={{
+            </div>
+          )}
+          </div>
+          </div>
+          
+          <div style={{backgroundColor: "#fff", padding: "10px", margin: "10px", borderRadius: "5px"}}>
+          <p style={{ backgroundColor: "#fff", padding: "10px", fontWeight: "800", textAlign: "center"}}>
+          Status: 2:00 PM <span style={{color: "#E26868", fontSize: "20px"}}> {tempSessionTwo}</span>
+          </p>
+          <div>
+          {isLoadingHere ? (
+            <p>
+              Loading ... 
+            </p>
+          ) : (
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+              <Button variant="contained" style={{
                 marginLeft:10,
                 backgroundColor: '#00C53B',
                 marginTop:15
               }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '2:00 PM', 'opened')}>Open Booking  - 2:00 PM Today</Button>  
-        <Button variant="contained" style={{
+              <Button variant="contained" style={{
                 marginLeft:10,
-                backgroundColor: '#C50000',
                 marginTop:15
               }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '2:00 PM', 'closed')}>Close Booking  - 2:00 PM Today</Button>  
-        <Button variant="contained" style={{
+            </div>
+          )}
+          </div>
+          </div>
+          
+          <div style={{backgroundColor: "#E8C4C4", padding: "10px", margin: "10px", borderRadius: "5px"}}>
+          <p style={{ backgroundColor: "#E8C4C4", padding: "10px", fontWeight: "800", textAlign: "center"}}>
+          Status: Lunch<span style={{color: "#E26868", fontSize: "20px"}}> {tempLunch}</span>
+          </p>
+          <div>
+          {isLoadingHere ? (
+            <p>
+              Loading ... 
+            </p>
+          ) : (
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <Button variant="contained" style={{
                 marginLeft:10,
-                backgroundColor: '#897EFF',
+                backgroundColor: '#00C53B',
                 marginTop:15
               }} onClick={(e) => doBookingThisDateCloseTodaySession(e, 'lunch', 'opened')}>Open Booking  - Lunch Today</Button>  
-        <Button variant="contained" style={{
+            <Button variant="contained" style={{
                 marginLeft:10,
-                backgroundColor: '#1500FF',
                 marginTop:15
               }} onClick={(e) => doBookingThisDateCloseTodaySession(e, 'lunch', 'closed')}>Close Booking  - Lunch Today</Button>  
-        <Button variant="contained" style={{
+            </div>
+          )}
+          </div>
+          </div>
+          
+          <div style={{backgroundColor: "#E8C4C4", padding: "10px", margin: "10px", borderRadius: "5px"}}>
+          <p style={{ backgroundColor: "#E8C4C4", padding: "10px", fontWeight: "800", textAlign: "center"}}>
+          Status: Dinner <span style={{color: "#E26868", fontSize: "20px"}}> {tempDinner}</span>
+          </p>
+          <div>
+          {isLoadingHere ? (
+            <p>
+              Loading ... 
+            </p>
+          ) : (
+            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <Button variant="contained" style={{
                 marginLeft:10,
-                backgroundColor: '#DAFF55',
+                backgroundColor: '#00C53B',
                 marginTop:15
               }} onClick={(e) => doBookingThisDateCloseTodaySession(e, 'dinner', 'opened')}>Open Booking  - Dinner Today</Button>  
-        <Button variant="contained" style={{
+            <Button variant="contained" style={{
                 marginLeft:10,
-                backgroundColor: '#950000',
                 marginTop:15
-              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, 'dinner', 'closed')}>Close Booking  - Dinner Today</Button>  
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, 'dinner', 'closed')}>Close Booking  - Dinner Today</Button>
             </div>
-          )
-
-          }
+          )}
+          </div>
+          </div>
+          
+          </div>
+          
         
         </div>
-        <div>
-
-        </div>
-        <Button variant="contained" style={{
-                marginLeft:10,
-                backgroundColor: '#C50000',
-                marginTop:15
-              }} onClick={doBookingThisDateClose}>Close Booking This Date</Button>
-        <Button variant="contained" style={{
-                marginLeft:10,
-                backgroundColor: '#45C500',
-                marginTop:15
-              }} onClick={doBookingThisDateOpen}>Open Booking This Date</Button>
+        
+        
         </div>
         <div>
         <Box sx={{ flexGrow: 1 }}>

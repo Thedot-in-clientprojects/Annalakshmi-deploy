@@ -22,7 +22,7 @@ function Navbar() {
     const [showBasic, setShowBasic] = useState(false);
 
   return (
-    <MDBNavbar expand='lg' light bgColor='light'>
+    <MDBNavbar expand='lg' light bgColor='light' sticky>
     <MDBContainer fluid style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
       
       <MDBNavbarBrand href='#'>
