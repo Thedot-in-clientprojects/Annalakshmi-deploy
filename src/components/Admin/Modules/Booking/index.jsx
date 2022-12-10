@@ -78,8 +78,8 @@ const resMoveToTodayProcess = (e, res) => {
     const no = res.no
     const date = res.date
     const session = res.session
-    const status = res.
-    cont
+    const status = res.status
+    const lunchSlot = res.lunchSlot
     set(ref(db, `/reservation/${res.userId}`), {
         userId: userId,
         name: name,
@@ -87,7 +87,8 @@ const resMoveToTodayProcess = (e, res) => {
         phone: phone,
         date: date,
         session: session,
-        status: 'Process'
+        status: 'Process',
+        lunchSlot: lunchSlot
       }).then(res => {
       })
 }
@@ -154,29 +155,29 @@ const resMoveBackToAccept = (e, res) => {
 
 
 const resMoveToTodayDone = (e, res) => {
-    e.preventDefault();
-    setResReRedner(!resReRender)
-    const db = getDatabase();
-    const userId = res.userId;
-    const name = res.name
-    const phone = res.phone
-    const no = res.no
-    const date = res.date
-    const session = res.session
-    const status = res.status
-    const lunchSlot = res.lunchSlot
-    console.log(res)
-    set(ref(db, `/reservation/${res.userId}`), {
-        userId: userId,
-        name: name,
-        no: no,
-        phone: phone,
-        date: date,
-        session: session,
-        status: 'Done',
-        lunchSlot: lunchSlot
-      }).then(res => {
-      })
+  e.preventDefault();
+  setResReRedner(!resReRender)
+  const db = getDatabase();
+  console.log(res.userId);
+  const userId = res.userId;
+  const name = res.name
+  const phone = res.phone
+  const no = res.no
+  const date = res.date
+  const session = res.session
+  const status = res.status
+  const lunchSlot = res.lunchSlot
+  set(ref(db, `/reservation/${res.userId}`), {
+      userId: userId,
+      name: name,
+      no: no,
+      phone: phone,
+      date: date,
+      session: session,
+      status: 'Done',
+      lunchSlot: lunchSlot
+    }).then(res => {
+    })
 }
 
 const resMoveBackToProcess = (e, res) => {
@@ -301,28 +302,29 @@ const resBookingCancel = (e, res) => {
 }
 
 const resBookingToComplete = (e, res) => {
-    e.preventDefault();
-    setResReRedner(!resReRender)
-    const userId = res.userId;
-    const name = res.name
-    const phone = res.phone
-    const no = res.no
-    const date = res.date
-    const session = res.session
-    const status = res.status
-    const lunchSlot = res.lunchSlot
-    set(ref(db, `/reservation/${res.userId}`), {
-        userId: userId,
-        name: name,
-        no: no,
-        phone: phone,
-        date: date,
-        session: session,
-        status: 'Complete',
-        lunchSlot: lunchSlot
-      }).then(res => {
-       
-      })
+  e.preventDefault();
+  setResReRedner(!resReRender)
+  const db = getDatabase();
+  console.log(res.userId);
+  const userId = res.userId;
+  const name = res.name
+  const phone = res.phone
+  const no = res.no
+  const date = res.date
+  const session = res.session
+  const status = res.status
+  const lunchSlot = res.lunchSlot
+  set(ref(db, `/reservation/${res.userId}`), {
+      userId: userId,
+      name: name,
+      no: no,
+      phone: phone,
+      date: date,
+      session: session,
+      status: 'Complete',
+      lunchSlot: lunchSlot
+    }).then(res => {
+    })
 }
 
 const resBookingToCompletedDone = (e, res) => {
@@ -406,24 +408,42 @@ const doBookingClose = (e) => {
       e.preventDefault();
       setbookingStatus(false);
       const db = getDatabase();
-      set(ref(db, `/status/booking/`), {
-        status: 'closed'
-        
-      }).then(res => {
-       
-      })
+        const id = uuidv4();
+          if(selectedDateWord){
+            set(ref(db, `/block/booking/date/${selectedDateWord}`), {
+              date: selectedDateWord,
+              status: 'closed',
+              sessionTwelve: 'opened',
+              sessionOne: 'opened',
+              sessionTwo: 'opened',
+              dinner:'opened',
+              lunch: 'opened'
+              }).then(res => {
+             
+            })
+          }
+         
      
 }
 const doBookingOpen = (e) => {
       e.preventDefault();
       setbookingStatus(true);
       const db = getDatabase();
-      set(ref(db, `/status/booking/`), {
-        status: 'opened'
-        
-      }).then(res => {
+      const id = uuidv4();
+        if(selectedDateWord){
+          set(ref(db, `/block/booking/date/${selectedDateWord}`), {
+            date: selectedDateWord,
+            status: 'opened',
+            sessionTwelve: 'opened',
+            sessionOne: 'opened',
+            sessionTwo: 'opened',
+            dinner:'opened',
+            lunch: 'opened'
+            }).then(res => {
+           
+          })
+        }
        
-      })
     }
 
 
@@ -444,7 +464,7 @@ const doBookingOpen = (e) => {
 
   useEffect(() => {
     getBookingStatusHere();   
-  }, [bookingStatus])
+  }, [])
   
 
 
@@ -479,6 +499,206 @@ const doBookingOpen = (e) => {
          
   }
 
+
+  // Temp Status ----------------------------------------------------
+
+  const [tempStatus, settempStatus] = useState('');
+  const [tempSessionTwelve, settempSessionTwelve] = useState('');
+  const [tempSessionOne, settempSessionOne] = useState('');
+  const [tempSessionTwo, settempSessionTwo] = useState('');
+  const [tempDinner, settempDinner] = useState('');
+  const [tempLunch, settempLunch] = useState('');
+  const [tempData, settempData] = useState('');
+  // ----------------------------------------------------------------
+
+
+  // ? ***************************************************************
+
+  const [selectedProductStatus, setselectedProductStatus] = useState(false);
+  const [isLoadingHere, setisLoadingHere] = useState(false);
+  // ? ---------------------------------------------------------------
+  const doBookingThisDateCloseTodaySession = (e, session, status) => {
+        e.preventDefault();
+        const db = getDatabase();
+        const id = uuidv4();
+        setisLoadingHere(true)
+        if(selectedDateWord === ''){
+          setselectedProductStatus(true);
+          setisLoadingHere(false)
+        }
+        else{
+        const sessionToday = ref(db, `/block/booking/date/${selectedDateWord}`);
+        onValue(sessionToday, (snapshot) => {
+            const data = snapshot.val();
+            setisLoadingHere(true)
+            console.log("Check DATA -> ", data);
+            if(data){
+              console.log("Status -> ", data);
+              settempData(data)
+              settempStatus(data.status);
+              settempSessionTwelve(data.sessionTwelve);
+              settempSessionOne(data.sessionOne);
+              settempSessionTwo(data.sessionTwo);
+              settempDinner(data.dinner);
+              settempLunch(data.lunch);
+              
+            if(selectedDateWord){
+
+              if(session === 'dinner'){
+                set(ref(db, `/block/booking/date/${selectedDateWord}`), {
+                  date: data.date,
+                  status: data.status,
+                  sessionTwelve: data.sessionTwelve,
+                  sessionOne: data.sessionOne,
+                  sessionTwo: data.sessionTwo,
+                  dinner: status,
+                  lunch: data.lunch
+                  }).then(res => {
+                      setisLoadingHere(false)
+                      window.location.reload(true)
+                })
+              }
+            else if(session === 'lunch'){
+                set(ref(db, `/block/booking/date/${selectedDateWord}`), {
+                  date: data.date,
+                  status: data.status,
+                  sessionTwelve: status,
+                  sessionOne: status,
+                  sessionTwo: status,
+                  dinner: data.dinner,
+                  lunch: status
+                  }).then(res => {
+                    setisLoadingHere(false)
+                      window.location.reload(true)
+                })
+              }
+              else if(session === 'Global'){
+                set(ref(db, `/block/booking/date/${selectedDateWord}`), {
+                  date: data.date,
+                  status: status,
+                  sessionTwelve: data.sessionTwelve,
+                  sessionOne: data.sessionOne,
+                  sessionTwo: data.sessionTwo,
+                  dinner: data.dinner,
+                  lunch: data.lunch  
+                  }).then(res => {
+                    setisLoadingHere(false)
+                      window.location.reload(true)
+                })
+              }
+              else if(session === '12:00 PM'){
+                set(ref(db, `/block/booking/date/${selectedDateWord}`), {
+                  date: data.date,
+                  status: data.status,
+                  sessionTwelve: status,
+                  sessionOne: data.sessionOne,
+                  sessionTwo: data.sessionTwo,
+                  dinner: data.dinner,
+                  lunch: data.lunch
+                  }).then(res => {
+                    setisLoadingHere(false)
+                      window.location.reload(true)
+
+                })
+              }
+              else if(session === '1:00 PM'){
+                set(ref(db, `/block/booking/date/${selectedDateWord}`), {
+                  date: data.date,
+                  status: data.status,
+                  sessionTwelve: data.sessionTwelve,
+                  sessionOne: status,
+                  sessionTwo: data.sessionTwo,
+                  dinner: data.dinner,
+                  lunch: data.lunch
+                  }).then(res => {
+                    setisLoadingHere(false)
+                      window.location.reload(true)
+
+                })
+              }
+              else if(session === '2:00 PM'){
+                set(ref(db, `/block/booking/date/${selectedDateWord}`), {
+                  date: data.date,
+                  status: data.status,
+                  sessionTwelve: data.sessionTwelve,
+                  sessionOne: data.sessionOne,
+                  sessionTwo: status,
+                  dinner: data.dinner,
+                  lunch: data.lunch
+                  }).then(res => {
+                    setisLoadingHere(false)
+                      window.location.reload(true)
+
+                })
+              }
+            }
+            }
+            else{
+              settempData('')
+             }
+          })
+          
+        }
+          
+         
+  }
+
+  const getSelectedDateStatusHere = () => {
+    const db = getDatabase();
+    setisLoadingHere(true)
+ 
+    console.log('selectedDateWord : ', selectedDateWord);
+    if(selectedDateWord === ''){
+        setselectedProductStatus(true)
+    }
+    else{
+    const sessionToday = ref(db, `/block/booking/date/${selectedDateWord ? selectedDateWord : dayjs(new Date()).format('DD-MM-YYYY')}`);
+    onValue(sessionToday, (snapshot) => {
+            const data = snapshot.val();
+            console.log("Status getSelectedDateStatusHere() -> ", data);
+            if(data === null){
+              set(ref(db, `/block/booking/date/${selectedDateWord}`), {
+                date: selectedDateWord,
+                status: 'opened',
+                sessionTwelve: 'opened',
+                sessionOne: 'opened',
+                sessionTwo: 'opened',
+                dinner: 'opened',
+                lunch: 'opened'
+                }).then(res => {
+                  setisLoadingHere(false)
+
+              })
+              
+            }
+            else{
+              settempData(data);
+              settempStatus(data.status);
+              settempSessionTwelve(data.sessionTwelve);
+              settempSessionOne(data.sessionOne);
+              settempSessionTwo(data.sessionTwo);
+              settempDinner(data.dinner);
+              settempLunch(data.lunch);
+              setisLoadingHere(false);
+
+            }
+            
+        });
+      }
+
+  }
+
+
+  useEffect(() => {
+      if(selectedProductStatus){
+        setTimeout(() => {
+          setselectedProductStatus(false)
+      }, 3000);
+      }
+        getSelectedDateStatusHere();
+  }, [selectedProductStatus, tempData])
+  
+
   return (
     <div>
         <h4 style={{
@@ -502,6 +722,20 @@ const doBookingOpen = (e) => {
               }} onClick={doBookingOpen}>Booking Open</Button>
             )
             }
+            <div>
+                {selectedProductStatus ? (
+                    <p style={{
+                        color:'#EF0000'
+                    }}
+                    >
+                      Please Select the Date
+                    </p>
+                ) : (
+                  null
+                )
+
+                }
+            </div>
             <h3 style={{
               textAlign: 'center',
               fontWeight:'600'
@@ -517,6 +751,90 @@ const doBookingOpen = (e) => {
         }}>
         <Calendar 
         onChange={calendarDate} value={value} />
+        <div>
+          <div style={{
+            margin:20,
+            backgroundColor:'#FF8080'
+          }}>
+
+          <p>
+            Status: 12:00 PM {tempSessionTwelve}
+          </p>
+          <p>
+            Status: 1:00 PM {tempSessionOne}
+          </p>
+          <p>
+            Status: 2:00 PM {tempSessionTwo}
+          </p>
+          <p>
+            Status: Lunch  {tempLunch}
+          </p>
+          <p>
+            Status: Dinner  {tempDinner}
+          </p>
+          </div>
+          {isLoadingHere ? (
+            <p>
+              Loading ... 
+            </p>
+          ) : (
+            <div>
+              <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#00C53B',
+                marginTop:15
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '12:00 PM', 'opened')}>Open Booking  - 12:00 PM Today</Button>  
+        <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#C50000',
+                marginTop:15
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '12:00 PM', 'closed')}>Close Booking  - 12:00 PM Today</Button>  
+        <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#00C53B',
+                marginTop:15
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '1:00 PM', 'opened')}>Open Booking  - 1:00 PM Today</Button>  
+        <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#C50000',
+                marginTop:15
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '1:00 PM', 'closed')}>Close Booking  - 1:00 PM Today</Button>  
+        <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#00C53B',
+                marginTop:15
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '2:00 PM', 'opened')}>Open Booking  - 2:00 PM Today</Button>  
+        <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#C50000',
+                marginTop:15
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '2:00 PM', 'closed')}>Close Booking  - 2:00 PM Today</Button>  
+        <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#897EFF',
+                marginTop:15
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, 'lunch', 'opened')}>Open Booking  - Lunch Today</Button>  
+        <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#1500FF',
+                marginTop:15
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, 'lunch', 'closed')}>Close Booking  - Lunch Today</Button>  
+        <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#DAFF55',
+                marginTop:15
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, 'dinner', 'opened')}>Open Booking  - Dinner Today</Button>  
+        <Button variant="contained" style={{
+                marginLeft:10,
+                backgroundColor: '#950000',
+                marginTop:15
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, 'dinner', 'closed')}>Close Booking  - Dinner Today</Button>  
+            </div>
+          )
+
+          }
+        
+        </div>
         <div>
 
         </div>

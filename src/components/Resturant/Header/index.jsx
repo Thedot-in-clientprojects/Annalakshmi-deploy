@@ -88,8 +88,63 @@ function Header() {
   const handleCloseUserData = () => setOpen(false);
 
   const [date, setdate] = useState(dayjs(new Date()))
+
+
+  // Temp Status ----------------------------------------------------
+
+  const [tempStatus, settempStatus] = useState('');
+  const [tempSessionTwelve, settempSessionTwelve] = useState('');
+  const [tempSessionOne, settempSessionOne] = useState('');
+  const [tempSessionTwo, settempSessionTwo] = useState('');
+  const [tempDinner, settempDinner] = useState('');
+  const [tempLunch, settempLunch] = useState('');
+  const [tempData, settempData] = useState('');
+  // ----------------------------------------------------------------
+
+
+  const getTodaysSessionStatus = () => {
+    const db = getDatabase();
+    console.log("Date Handle Change -> ", dayjs(date.$d).format('DD-MM-YYYY') )
+    const sessionToday = ref(db, `/block/booking/date/${dayjs(new Date()).format('DD-MM-YYYY')}`);
+    onValue(sessionToday, (snapshot) => {
+        const data = snapshot.val();
+        console.log("Check DATA -> Home Pae ", data);
+          console.log("Status -> ", data);
+          settempData(data)
+          settempStatus(data.status);
+          settempSessionTwelve(data.sessionTwelve);
+          settempSessionOne(data.sessionOne);
+          settempSessionTwo(data.sessionTwo);
+          settempDinner(data.dinner);
+          settempLunch(data.lunch);
+    });     
+  }
+
+  useEffect(() => {
+    getTodaysSessionStatus()
+  }, [])
+  
+
+
   const handleChange = (newValue) => {
     setdate(newValue);
+    const db = getDatabase();
+    console.log("The Actual Date: ", (date.$D + 1) + '-' + (date.$M + 1) + '-' + date.$y);
+    const actualDate = (date.$D + 1) + '-' + (date.$M + 1) + '-' + date.$y;
+    console.log("Date Handle Change -> ", dayjs(date.$d).format('DD-MM-YYYY') )
+    const sessionToday = ref(db, `/block/booking/date/${actualDate}`);
+    onValue(sessionToday, (snapshot) => {
+        const data = snapshot.val();
+        console.log("Check DATA -> Home Pae ", data);
+          console.log("Status -> ", data);
+          settempData(data)
+          settempStatus(data.status);
+          settempSessionTwelve(data.sessionTwelve);
+          settempSessionOne(data.sessionOne);
+          settempSessionTwo(data.sessionTwo);
+          settempDinner(data.dinner);
+          settempLunch(data.lunch);
+    });          
   };
   
   
@@ -128,17 +183,17 @@ const [lunchSessionSlot, setlunchSessionSlot] = useState('');
 const luchSessionPicker = (e, lunchSession) => {
       e.preventDefault();
       setlunchSessionSlot(lunchSession);
-      if(lunchSession === '12:30 PM'){
+      if(lunchSession === '12:00 PM'){
           setlunchTimingSessionStatus12(true);
           setlunchTimingSessionStatus01(false);
           setlunchTimingSessionStatus02(false);
       }
-      else if(lunchSession === '1:30 PM'){
+      else if(lunchSession === '1:00 PM'){
           setlunchTimingSessionStatus01(true);
           setlunchTimingSessionStatus12(false);
           setlunchTimingSessionStatus02(false);
       }
-      else if(lunchSession === '2:30 PM'){
+      else if(lunchSession === '2:00 PM'){
           setlunchTimingSessionStatus01(false);
           setlunchTimingSessionStatus02(true);
           setlunchTimingSessionStatus12(false);
@@ -296,6 +351,15 @@ useEffect(() => {
 
 // *? ******************************************************
 
+// ************************* All Calendar Logics *******************************
+
+
+
+
+
+
+// *****************************************************************************
+
   return (
     <header style={{paddingTop: 80}}   data-scroll-index="0">
           <div className='header-main'>
@@ -303,16 +367,9 @@ useEffect(() => {
               <img className='header-main-img' src="/img/headerimg.png" />
               <h1 className='header-main-title'>A UNIQUE DINING <br /> CONCEPT</h1>
              
-                {bookingStatusHere === 'opened' ? (
+            
                 <button className="header-main-btn" onClick={handleOpen}>Reservation</button>
 
-                ) : (
-                  <h3 className="saman" style={{color: "#9B1915", fontSize: "2rem"}}>
-                  Reservation Closed
-                  </h3>
-                )
-
-                }
                 <Modal
                   aria-labelledby="spring-modal-title"
                   aria-describedby="spring-modal-description"
@@ -360,14 +417,13 @@ useEffect(() => {
                         </LocalizationProvider>
 
                         <p style={{fontWeight: "bold", marginBottom: 10}}>Select the Session</p>
-                        {/* {
-                                  console.log("Current Time and Current Date -> ", currentDate, date, currentTime)
-                                } */}
+                     
                         <div>
                           {currentTime <= 15 || currentDate != date.$D  ? (
                                 <>
-                               
-                                <Chip icon={<LightModeIcon style={lunchSessionStatus ? {
+                                {tempLunch === 'opened' ? (
+                                  <>
+                                  <Chip icon={<LightModeIcon style={lunchSessionStatus ? {
                                   color:'#FFFFFF'
                                 } : {}}/>} 
                                 // color={sessionHere === 'Lunch' ?  "success" : ""} 
@@ -378,30 +434,72 @@ useEffect(() => {
                                 }: {
                                   marginRight:15
                                 }}
-                            onClick={(e) => selectSessionHere(e, 'Lunch')}
-
+                                onClick={(e) => selectSessionHere(e, 'Lunch')}
                                   />
-                                  <Chip icon={<NightsStayIcon style={dinnerSessionStatus ? {
-                                  color:'#FFFFFF'
-                                } : {}} />} label="Dinner" 
-                                  variant={dinnerSessionStatus ? "" : "outlined" }
-                                  style={dinnerSessionStatus ?  {
-                                    marginRight:15,
-                                    backgroundColor:'#910000',
-                                    color:'#FFFFFF'
-                                  }: {
-                                    marginRight:15
-                                  }}
-                                  // color={sessionHere === 'Dinner' ?  "success" : ""}
-                            
-                            onClick={(e) => selectSessionHere(e, 'Dinner')}
-                            />
+                                     {tempDinner === 'opened'? (
+                                         <Chip icon={<NightsStayIcon style={dinnerSessionStatus ? {
+                                          color:'#FFFFFF'
+                                        } : {}} />} label="Dinner" 
+                                          variant={dinnerSessionStatus ? "" : "outlined" }
+                                          style={dinnerSessionStatus ?  {
+                                            marginRight:15,
+                                            backgroundColor:'#910000',
+                                            color:'#FFFFFF'
+                                          }: {
+                                            marginRight:15
+                                          }}
+                                          // color={sessionHere === 'Dinner' ?  "success" : ""}
+                                    
+                                    onClick={(e) => selectSessionHere(e, 'Dinner')}
+                                    />
+                          ) : (
+                            null
+                          )
+
+                          }
+                      
+                                  </>
+                                ) : (
+                                  <>
+                          {tempDinner === 'opened'? (
+                        <Chip icon={<NightsStayIcon style={dinnerSessionStatus ? {
+                          color:'#FFFFFF'
+                        } : {}} />} label="Dinner" 
+                          variant={dinnerSessionStatus ? "" : "outlined" }
+                          style={dinnerSessionStatus ?  {
+                            marginRight:15,
+                            backgroundColor:'#910000',
+                            color:'#FFFFFF'
+                          }: {
+                            marginRight:15
+                          }}
+                          // color={sessionHere === 'Dinner' ?  "success" : ""}
+                    
+                    onClick={(e) => selectSessionHere(e, 'Dinner')}
+                    />
+                       ) : (null)}
+                                  </>  
+                                 
+                                )
+
+                                }
+                                
+                              
                             </>
-                          )  :  (
+                          )  :  (<>
+                          {tempDinner === 'opened'? (
                             <Chip icon={<NightsStayIcon />} label="Dinner"
                             variant={dinnerSessionStatus ? "" : "outlined" }
                             onClick={(e) => selectSessionHere(e, 'Dinner')}
                             />
+                          ) : (
+                            null
+                          )
+
+                          }
+                          
+                              </>
+                            
                           )
                           }
 
@@ -409,40 +507,50 @@ useEffect(() => {
                             <div style={{
                               marginTop:15
                             }}>
-                                <Chip variant={lunchTimingSessionStatus12 ? "" : "outlined" }
-                                  style={lunchTimingSessionStatus12 ?  {
-                                    marginRight:1,
-                                    backgroundColor:'#910000',
-                                    color:'#FFFFFF'
-                                  }: {
-                                    marginRight:15
-                                  }} onClick={(e) => luchSessionPicker(e, '12:30 PM')} icon={<AccessTimeIcon
-                                    style={lunchTimingSessionStatus12 ? {
+                              {tempSessionTwelve && tempSessionTwelve === 'opened' ? (
+                                    <Chip variant={lunchTimingSessionStatus12 ? "" : "outlined" }
+                                    style={lunchTimingSessionStatus12 ?  {
+                                      marginRight:1,
+                                      backgroundColor:'#910000',
                                       color:'#FFFFFF'
-                                    } : {}} 
-                                    />} label="12:30 PM" 
-                            
-                            />
-                            <Chip 
+                                    }: {
+                                      marginRight:15
+                                    }} onClick={(e) => luchSessionPicker(e, '12:00 PM')} icon={<AccessTimeIcon
+                                      style={lunchTimingSessionStatus12 ? {
+                                        color:'#FFFFFF'
+                                      } : {}} 
+                                      />} label="12:00 PM" 
+                              
+                              />
+                                ) : (
+                                  null
+                              )
+
+                              }
+                              {tempSessionOne && tempSessionOne === 'opened' ? (
+                                <Chip 
                              style={lunchTimingSessionStatus01 ? {
                               marginRight:5,
-
                               backgroundColor:'#910000',
                               color:'#FFFFFF'
                             } : {}} 
-                            onClick={(e) => luchSessionPicker(e, '1:30 PM')} icon={<AccessTimeIcon 
+                            onClick={(e) => luchSessionPicker(e, '1:00 PM')} icon={<AccessTimeIcon 
                               style={lunchTimingSessionStatus01 ? {
                                 color:'#FFFFFF'
                               } : {}}
-                            />} label="1:30 PM" variant="outlined" 
-                            
-                            
+                            />} label="1:00 PM" variant="outlined" 
                             />
-                            <Chip onClick={(e) => luchSessionPicker(e, '2:30 PM')} icon={<AccessTimeIcon 
+                              ) : (
+                                null 
+                              )
+
+                              }
+                            
+                            <Chip onClick={(e) => luchSessionPicker(e, '2:00 PM')} icon={<AccessTimeIcon 
                             style={lunchTimingSessionStatus02 ? {
                               color:'#FFFFFF'
                             } : {}}
-                            />} label="2:30 PM" variant="outlined" 
+                            />} label="2:00 PM" variant="outlined" 
                               style={lunchTimingSessionStatus02 ? {
                                 backgroundColor:'#910000',
                                 color:'#FFFFFF'
