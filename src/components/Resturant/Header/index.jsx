@@ -40,6 +40,7 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import NightsStayIcon from '@mui/icons-material/NightsStay';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import { NoEncryption } from "@mui/icons-material";
+import Router from 'next/router'
 
 
 const Fade = React.forwardRef(function Fade(props, ref) {
@@ -241,8 +242,11 @@ const luchSessionPicker = (e, lunchSession) => {
         setname('')
         setphone('')
         setdate('')
-        handleCloseUserData()
-        window.location.reload()
+        handleCloseUserData();
+        window.open(`https://wa.me/916364250724?text=Hi, This is _*${name}*_, I am reserving for *${noMembers}* members on *${date}* - ${sessionHere} Session - *${lunchSessionSlot}*. Contact me: +91 ${phone}`)
+        // window.location.href
+        // window.location.reload()
+        Router.push('/success-page');
 
       })
   }else{
