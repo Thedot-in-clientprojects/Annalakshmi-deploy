@@ -752,7 +752,6 @@ const doBookingOpen = (e) => {
             
         </h4>
         
-        
         <div style={{
             margin:25,
             justifyContent:'center',

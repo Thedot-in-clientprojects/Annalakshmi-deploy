@@ -536,7 +536,7 @@ useEffect(() => {
                             } : {}} 
                             onClick={(e) => luchSessionPicker(e, '1:00 PM')} icon={<AccessTimeIcon 
                               style={lunchTimingSessionStatus01 ? {
-                                color:'#FFFFFF'
+                                color:'#FFFFFF',
                               } : {}}
                             />} label="1:00 PM" variant="outlined" 
                             />
@@ -546,15 +546,17 @@ useEffect(() => {
 
                               }
                             
-                            <Chip onClick={(e) => luchSessionPicker(e, '2:00 PM')} icon={<AccessTimeIcon 
+                            <Chip  onClick={(e) => luchSessionPicker(e, '2:00 PM')} icon={<AccessTimeIcon 
                             style={lunchTimingSessionStatus02 ? {
-                              color:'#FFFFFF'
+                              color:'#FFFFFF',
+                              
                             } : {}}
                             />} label="2:00 PM" variant="outlined" 
                               style={lunchTimingSessionStatus02 ? {
                                 backgroundColor:'#910000',
-                                color:'#FFFFFF'
-                              } : {}} 
+                                color:'#FFFFFF',
+                                marginLeft: 12
+                              } : {marginLeft: 12}} 
                             />
                                 
                             </div>
