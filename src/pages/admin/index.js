@@ -12,6 +12,7 @@ import AdminMenu from './menu';
 import AdminBlogs from '../../components/Admin/Modules/Blogs';
 import AdminBookings from '../../components/Admin/Modules/Booking';
 import GalleryAdmin from '../../components/Admin/Modules/Gallery';
+import AdminUserEnquiries from '../../components/Admin/Modules/Enquiries';
 
 
 
@@ -38,6 +39,11 @@ function AdminComponent() {
             Bookings And Users
           </MDBTabsLink>
         </MDBTabsItem>
+        <MDBTabsItem >
+          <MDBTabsLink  onClick={() => handleBasicClick('tab5')} active={basicActive === 'tab5'} style={{color: "#971A1F", borderRadius: "10px", fontFamily: "GilroyExtra", fontSize: "15px"}}>
+            User Enquiries
+          </MDBTabsLink>
+        </MDBTabsItem>
         <MDBTabsItem>
           <MDBTabsLink onClick={() => handleBasicClick('tab2')} active={basicActive === 'tab2'} style={{color: "#971A1F", borderRadius: "10px", marginLeft: "5px", fontFamily: "GilroyExtra", fontSize: "15px"}}>
           Menu            
@@ -57,6 +63,7 @@ function AdminComponent() {
 
       <MDBTabsContent>
       <MDBTabsPane show={basicActive === 'tab1'}><AdminBookings/></MDBTabsPane>
+      <MDBTabsPane show={basicActive === 'tab5'}><AdminUserEnquiries/></MDBTabsPane>
         <MDBTabsPane show={basicActive === 'tab2'} style={{ backgroundColor:'#FFEEC9', marginLeft:10, marginRight:10,borderRadius:10, minHeight: "80vh" }}><AdminMenu/></MDBTabsPane>
         <MDBTabsPane show={basicActive === 'tab3'} style={{ backgroundColor:'#FFEEC9', padding: "15px", borderRadius: "10px", minHeight: "80vh" }}><AdminBlogs/></MDBTabsPane>
         <MDBTabsPane show={basicActive === 'tab4'} style={{ backgroundColor:'#FFEEC9', padding: "15px", borderRadius: "10px", minHeight: "80vh" }}><GalleryAdmin/></MDBTabsPane>
