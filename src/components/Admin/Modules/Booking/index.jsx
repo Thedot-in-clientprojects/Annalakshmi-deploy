@@ -50,7 +50,7 @@ const getAllReservationsHere = () => {
     onValue(reservation, (snapshot) => {
         const data = snapshot.val();
         Object.entries(data).map((res, index) => {
-          if(res[1].date === dayjs(new Date()).format('DD/MM/YYYY')){
+          if(res[1].date === selectedDateWordIt){
             reservation_list.push(res)
           }
         })
@@ -601,7 +601,7 @@ const doBookingOpen = (e) => {
 
                 })
               }
-              else if(session === '1:00 PM'){
+              else if(session === '1:30 PM'){
                 set(ref(db, `/block/booking/date/${selectedDateWord}`), {
                   date: data.date,
                   status: data.status,
@@ -803,7 +803,7 @@ const doBookingOpen = (e) => {
 
           <div style={{backgroundColor: "#fff", padding: "10px", margin: "10px", borderRadius: "5px"}}>
           <p style={{ backgroundColor: "#fff", padding: "10px", fontWeight: "800", textAlign: "center"}}>
-          Status: 1:00 PM <span style={{color: "#E26868", fontSize: "20px"}}>{tempSessionOne}</span>
+          Status: 1:30 PM <span style={{color: "#E26868", fontSize: "20px"}}>{tempSessionOne}</span>
           </p>
           <div>
           {isLoadingHere ? (
@@ -816,11 +816,11 @@ const doBookingOpen = (e) => {
                 marginLeft:10,
                 backgroundColor: '#00C53B',
                 marginTop:15
-              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '1:00 PM', 'opened')}>Open Booking  - 1:00 PM Today</Button>  
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '1:30 PM', 'opened')}>Open Booking  - 1:30 PM Today</Button>  
               <Button variant="contained" style={{
                 marginLeft:10,
                 marginTop:15
-              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '1:00 PM', 'closed')}>Close Booking  - 1:00 PM Today</Button>  
+              }} onClick={(e) => doBookingThisDateCloseTodaySession(e, '1:30 PM', 'closed')}>Close Booking  - 1:30 PM Today</Button>  
             </div>
           )}
           </div>

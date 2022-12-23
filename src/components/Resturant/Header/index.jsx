@@ -111,13 +111,16 @@ function Header() {
         const data = snapshot.val();
         console.log("Check DATA -> Home Pae ", data);
           console.log("Status -> ", data);
-          settempData(data)
-          settempStatus(data.status);
-          settempSessionTwelve(data.sessionTwelve);
-          settempSessionOne(data.sessionOne);
-          settempSessionTwo(data.sessionTwo);
-          settempDinner(data.dinner);
-          settempLunch(data.lunch);
+          if(data){
+            settempData(data)
+            settempStatus(data.status);
+            settempSessionTwelve(data.sessionTwelve);
+            settempSessionOne(data.sessionOne);
+            settempSessionTwo(data.sessionTwo);
+            settempDinner(data.dinner);
+            settempLunch(data.lunch);
+          }
+       
     });     
   }
 
@@ -189,7 +192,7 @@ const luchSessionPicker = (e, lunchSession) => {
           setlunchTimingSessionStatus01(false);
           setlunchTimingSessionStatus02(false);
       }
-      else if(lunchSession === '1:00 PM'){
+      else if(lunchSession === '1:30 PM'){
           setlunchTimingSessionStatus01(true);
           setlunchTimingSessionStatus12(false);
           setlunchTimingSessionStatus02(false);
@@ -243,7 +246,7 @@ const luchSessionPicker = (e, lunchSession) => {
         setphone('')
         setdate('')
         handleCloseUserData();
-        window.open(`https://wa.me/916364250724?text=Hi, This is _*${name}*_, I am reserving for *${noMembers}* members on *${date}* - ${sessionHere} Session - *${lunchSessionSlot}*. Contact me: +91 ${phone}`)
+        window.open(`https://wa.me/919843021844?text=Hi, This is _*${name}*_, I am reserving for *${noMembers}* members on *${date}* - ${sessionHere} Session - *${lunchSessionSlot}*. Contact me: +91 ${phone}`)
         // window.location.href
         // window.location.reload()
         Router.push('/success-page');
@@ -538,28 +541,23 @@ useEffect(() => {
                               backgroundColor:'#910000',
                               color:'#FFFFFF'
                             } : {}} 
-                            onClick={(e) => luchSessionPicker(e, '1:00 PM')} icon={<AccessTimeIcon 
+                            onClick={(e) => luchSessionPicker(e, '1:30 PM')} icon={<AccessTimeIcon 
                               style={lunchTimingSessionStatus01 ? {
                                 color:'#FFFFFF'
                               } : {}}
-                            />} label="1:00 PM" variant="outlined" 
+                            />} label="1:30 PM" variant="outlined" 
                             />
                               ) : (
                                 null 
                               )
 
                               }
-                            
-                            <Chip onClick={(e) => luchSessionPicker(e, '2:00 PM')} icon={<AccessTimeIcon 
-                            style={lunchTimingSessionStatus02 ? {
-                              color:'#FFFFFF'
-                            } : {}}
-                            />} label="2:00 PM" variant="outlined" 
-                              style={lunchTimingSessionStatus02 ? {
-                                backgroundColor:'#910000',
-                                color:'#FFFFFF'
-                              } : {}} 
-                            />
+                            <p style={{
+                              marginTop:8
+                            }}>
+                             🏁 By 3:30PM Lunch is closed
+                            </p>
+                              
                                 
                             </div>
                           ) : (
