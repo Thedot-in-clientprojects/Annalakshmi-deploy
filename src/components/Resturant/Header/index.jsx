@@ -543,7 +543,7 @@ useEffect(() => {
                             } : {}} 
                             onClick={(e) => luchSessionPicker(e, '1:30 PM')} icon={<AccessTimeIcon 
                               style={lunchTimingSessionStatus01 ? {
-                                color:'#FFFFFF'
+                                color:'#FFFFFF',
                               } : {}}
                             />} label="1:30 PM" variant="outlined" 
                             />

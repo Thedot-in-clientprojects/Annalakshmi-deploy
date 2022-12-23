@@ -14,8 +14,8 @@ const Navbar = ({ links, navbarRef, theme, logoTheme, container }) => {
   return (
     <nav className={`navbar navbar-expand-lg ${theme}`} ref={navbarRef}>
       <div className={`container${container==='nft-market' ? '-xxl':''}`}>
-        <Link className="navbar-brand" href="/">
-          <div className="logo">
+        <Link className="navbar-brand" href="/landing-preview">
+          <div className="logo" style={{cursor: "pointer"}}>
              <img src="img/annalogo1.png" alt="" className="logo--in" />
           </div>
         </Link>
