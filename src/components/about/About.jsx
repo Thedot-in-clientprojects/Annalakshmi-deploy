@@ -12,19 +12,13 @@ function AboutOne() {
             <h5 style={{padding: "2rem 0"}} >Annalakshmi at a Glance</h5>
             <h1 className="gilroyEB">Founder</h1>
             <img src="img/founder.png" className="founder-img" />
-            <h5  className="gilroyM">He mirrors the minds of those around him. Infinitely sensitive to every phenomenon and for whom every
-            phenomenon is a stimulus capable of provoking an infinite series of thoughts, he is a man whom admirable texts
-            cannot exhaust, do not even define. He says little, yet moves the young and old to action. An Indian by birth, 
-            a Swami by choice, a Sadhu by temperament, his ideas are nurtured by the simple, universal truths repeated 
-            endlessly in all cultures – serve, love, give – selflessly. Homeless in the literal sense of the word, yet firmly 
-            entrenched in the hearts of those who seek answers to the eternal mysteries, he guides by the light of the 
-            masters. He creates, outside the realm of reason, real yet symbolic worlds. His words confound and enlighten 
-            simultaneously. They are, as all great words are, open to multitude of meanings. Together they form a myriad 
-            of tiny mirrors that reflect the minds of his listeners. Perhaps the most striking quality of his thoughts is the way
-            they dismantle beliefs and notions foisted by years of schooled wisdom and, at the end of it all to glimpse in a 
-            strange intangible way, the quintessence of things as they always were and always will be. Such insights though
-            rare and precious, are sufficient to inspire, to motivate action, to take that one extra step
-            towards realizing a dream.</h5>
+            <h5  className="gilroyM">The foundation, strength and inspiration of Annalakshmi, is Swami Shantananda Saraswathi, who was born on 7th April 1934 as Chandrasekaran, in Thirukovillur, Tamil Nadu. Swamiji, as we endearingly call him, was initiated into divine Sanyas by Swami Sivananda, in 1951.
+
+Swamiji was responsible for the formation of dedicated institutions for numerous volunteers to practice Karma Yoga or Selfless Service. Annalakshmi, being one of these institutions, is where He allowed us to practice this infinite concept:
+
+“Where we do service, not for financial gain, name or fame, but just to bring a little joy to our guests.”
+
+We are grateful and delighted at the opportunity to serve you and thank you for your continued patronage and trust.</h5>
             
             <h1 style={{paddingTop: "4rem"}} className="gilroyEB">Idea</h1>
             <img src="img/annapic1.png" className="founder-img" />
@@ -68,17 +62,25 @@ function AboutOne() {
             idea that works towards an ideal as it builds a future on the very best of the past.</h5>
             <h1 style={{paddingTop: "4rem"}} className="gilroyEB">Annalakshmi</h1>
             <img src="img/annalak.png" className="founder-img" />
-            <h5 className="gilroyM" style={{ marginBottom: "2rem"}}>The Temple of Fine Arts idea is based on a simple dictum – serve, love and give. It is an idea that has evolved
-            into living palpable reality through an array of apparently disparate forms – a centre for the performing arts
-            that seeks to refine above all else, a vegetarian restaurant that serves more than just delectable food, a travel 
-            agency that places a premium on service rather than profit, and free medical and dental clinics that heal by 
-            caring. Touching the self in a way that goodness and decency invariably surfaces, it promotes sensitivity to 
-            one’s environment; a sense of harmony with fellow men. It teaches the value of faith in oneself and the 
-            importance of Shradhdha or right effort. The result is a cooperative endeavour that allows one to give 
-            according to his capacity and take according to his needs. It fosters continuity and change in a way that’s
-            as bold as it is exciting. It moves away from the comfort of dogma by combining the traditional with the 
-            modern. And it does it with an abandon that can only come from fearlessness, faith and fortitude. It is an 
-            idea that works towards an ideal as it builds a future on the very best of the past.</h5>
+            <h5 className="gilroyM" style={{ marginBottom: "2rem"}}>An ode to the Goddess of Food and Abundance, Annalakshmi redefines heart-warming
+hospitality. Service is the beam that illuminates our restaurant and our hospitality shines
+through in every facet of the dining experience. ‘Atithi Devo Bhava’ – The Guest is God, is
+the ethos of our operations, and one can feel the emanating warmth and servitude in every
+meal that graces our diner’s plates. Our cuisine is a result of fresh ingredients that are a gift
+from the earth, cooked with traditional recipes that have been passed on for generations,
+served with a dollop of humble hospitality and utmost warmth.
+<br/>
+Our team of largely voluntary staff imbibe love and divinity in all they do and our meals are
+prepared with the quintessence of our founder - to serve, love and give selflessly.
+Annalakshmi has curated a menu encompassing generations of traditional lore, customs and
+culture to bring you a celebration on every plate.
+<br />
+Our delectable vegetarian fare has been thoughtfully prepared and in tune with the season’s
+best produce. Fine dining that is graced by homestyle cooking to enliven the palate, fill the
+tummy and invigorate the soul. Along with our dedicated set menus transcending North and
+South Indian specialties, our celebrated thalis hold new delights each day to satiate the
+senses.
+Come and immerse yourself in a divine dining experience at Annalakshmi.</h5>
         </div>
         </div>
         </div>

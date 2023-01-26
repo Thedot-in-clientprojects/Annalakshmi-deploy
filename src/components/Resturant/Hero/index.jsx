@@ -21,13 +21,13 @@ const Hero = () => {
               </h3>
               <h5 className="mb-20 fz-22 fw-500 gilroyEB">Goddess of Abundance</h5>
               <p className="fz-18 gilroyM">
-              Annalakshmi is an Indian vegetarian restaurant with
-              a unique dining concept: ‘Eat as you want, Give as you feel.’ 
-              Since 1986, Annalakshmi has been serving the Coimbatorian 
-              community with delicious home-styled Indian vegetarian food.
-              Named after the goddess of nourishment and abundance, 
-              Annalakshmi strives to serve all its guests with that same 
-              whole-hearted generosity.
+              An ode to the Goddess of Food and Abundance, Annalakshmi redefines heart-warming
+hospitality. Service is the beam that illuminates our restaurant and our hospitality shines
+through in every facet of the dining experience. ‘Atithi Devo Bhava’ – The Guest is God, is
+the ethos of our operations, and one can feel the emanating warmth and servitude in every
+meal that graces our diner’s plates. Our cuisine is a result of fresh ingredients that are a gift
+from the earth, cooked with traditional recipes that have been passed on for generations,
+served with a dollop of humble hospitality and utmost warmth.
               </p>
               
             </div>

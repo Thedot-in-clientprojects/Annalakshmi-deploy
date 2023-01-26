@@ -372,7 +372,7 @@ useEffect(() => {
           <div className='header-main'>
             <Container>
               <img className='header-main-img' src="/img/headerimg.png" />
-              <h1 className='header-main-title'>A UNIQUE DINING <br /> CONCEPT</h1>
+              <h1 className='header-main-title'> Where vegetarian  dining <br/> is a cultural experience.</h1>
              
             
                 <button className="header-main-btn" onClick={handleOpen}>Reservation</button>
