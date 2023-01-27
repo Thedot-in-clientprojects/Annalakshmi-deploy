@@ -14,8 +14,11 @@ import Testimonials from '../../components/Resturant/Testimonials';
 import CallAction from '../../components/Resturant/CallAction';
 import Blog from '../../components/Resturant/Blog';
 import Footer from '../../components/Footers/RestaurantFooter';
+import { Button } from '@mui/material';
 
 const HomeRestaurant = () => {
+
+  
   useEffect(() => {
     document.body.classList.add('index-restaurant');
     
@@ -31,23 +34,13 @@ const HomeRestaurant = () => {
 
   const nav_links = [
     {
-      name: "About",
-      href: "/about-business"
-    },
-    {
-      name: "Contact Us",
-      href: "#0"
-    },
-    {
       name: "Menu",
-      href: "#0"
-    },
-    {
-      name: "Gallery",
-      href: "#0"
+      href: "/menu"
     },
     
+    
   ]
+  const scrollToBottom = () => { window. scrollTo({ top: document. documentElement. scrollHeight, behavior: 'smooth', }); }
 
   return (
     <>
@@ -61,13 +54,13 @@ const HomeRestaurant = () => {
         <main className="position-re">
           {/* <Features /> */}
           <Hero />
-          <Menu />
+          <Button className="contact-btn" onClick={scrollToBottom}>Contact Us</Button>
           <Services />
           <Gallery />
           <Testimonials />
           {/* <CallAction /> */}
-          <Blog />
-          <Footer />
+          
+          < Footer/>
         </main>
       </AppLayout>
     </>

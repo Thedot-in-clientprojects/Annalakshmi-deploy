@@ -3,9 +3,9 @@ import React from "react";
 function AboutOne() {
     return(
         <div>
-        <div className="about-main">
+        {/* <div className="about-main">
             <h1 className="saman" style={{color: "#fff"}}>About Us</h1>
-        </div>
+        </div> */}
         <img src="img/decbg.png" /> 
         <div className="bg-layer">
         <div className="container" style={{display: "flex", justifyContent: "center", alignItems: "center", flexFlow: "column", paddingTop: "2rem", textAlign: "center", textCombineUpright:"center"}}>
@@ -20,7 +20,7 @@ Swamiji was responsible for the formation of dedicated institutions for numerous
 
 We are grateful and delighted at the opportunity to serve you and thank you for your continued patronage and trust.</h5>
             
-            <h1 style={{paddingTop: "4rem"}} className="gilroyEB">Idea</h1>
+            {/* <h1 style={{paddingTop: "4rem"}} className="gilroyEB">Idea</h1>
             <img src="img/annapic1.png" className="founder-img" />
             <h5 className="gilroyM" style={{ marginBottom: "2rem"}}>The Temple of Fine Arts idea is based on a simple dictum – serve, love and give. It is an idea that has evolved
             into living palpable reality through an array of apparently disparate forms – a centre for the performing arts
@@ -59,28 +59,28 @@ We are grateful and delighted at the opportunity to serve you and thank you for 
             according to his capacity and take according to his needs. It fosters continuity and change in a way that’s
             as bold as it is exciting. It moves away from the comfort of dogma by combining the traditional with the 
             modern. And it does it with an abandon that can only come from fearlessness, faith and fortitude. It is an 
-            idea that works towards an ideal as it builds a future on the very best of the past.</h5>
+            idea that works towards an ideal as it builds a future on the very best of the past.</h5> */}
             <h1 style={{paddingTop: "4rem"}} className="gilroyEB">Annalakshmi</h1>
-            <img src="img/annalak.png" className="founder-img" />
+            <img src="img/annapic1.png" className="founder-img" />
             <h5 className="gilroyM" style={{ marginBottom: "2rem"}}>An ode to the Goddess of Food and Abundance, Annalakshmi redefines heart-warming
-hospitality. Service is the beam that illuminates our restaurant and our hospitality shines
-through in every facet of the dining experience. ‘Atithi Devo Bhava’ – The Guest is God, is
-the ethos of our operations, and one can feel the emanating warmth and servitude in every
-meal that graces our diner’s plates. Our cuisine is a result of fresh ingredients that are a gift
-from the earth, cooked with traditional recipes that have been passed on for generations,
-served with a dollop of humble hospitality and utmost warmth.
-<br/>
-Our team of largely voluntary staff imbibe love and divinity in all they do and our meals are
-prepared with the quintessence of our founder - to serve, love and give selflessly.
-Annalakshmi has curated a menu encompassing generations of traditional lore, customs and
-culture to bring you a celebration on every plate.
-<br />
-Our delectable vegetarian fare has been thoughtfully prepared and in tune with the season’s
-best produce. Fine dining that is graced by homestyle cooking to enliven the palate, fill the
-tummy and invigorate the soul. Along with our dedicated set menus transcending North and
-South Indian specialties, our celebrated thalis hold new delights each day to satiate the
-senses.
-Come and immerse yourself in a divine dining experience at Annalakshmi.</h5>
+                hospitality. Service is the beam that illuminates our restaurant and our hospitality shines
+                through in every facet of the dining experience. ‘Atithi Devo Bhava’ – The Guest is God, is
+                the ethos of our operations, and one can feel the emanating warmth and servitude in every
+                meal that graces our diner’s plates. Our cuisine is a result of fresh ingredients that are a gift
+                from the earth, cooked with traditional recipes that have been passed on for generations,
+                served with a dollop of humble hospitality and utmost warmth.
+                <br/>
+                Our team of largely voluntary staff imbibe love and divinity in all they do and our meals are
+                prepared with the quintessence of our founder - to serve, love and give selflessly.
+                Annalakshmi has curated a menu encompassing generations of traditional lore, customs and
+                culture to bring you a celebration on every plate.
+                <br />
+                Our delectable vegetarian fare has been thoughtfully prepared and in tune with the season’s
+                best produce. Fine dining that is graced by homestyle cooking to enliven the palate, fill the
+                tummy and invigorate the soul. Along with our dedicated set menus transcending North and
+                South Indian specialties, our celebrated thalis hold new delights each day to satiate the
+                senses.
+                Come and immerse yourself in a divine dining experience at Annalakshmi.</h5>
         </div>
         </div>
         </div>

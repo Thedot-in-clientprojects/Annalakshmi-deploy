@@ -36,6 +36,8 @@ const Menu = () => {
   //     });
   // }
 
+  const [statusMenuDefault, setstatusMenuDefault] = useState('');
+
 
   const getAllCategories = () => {
     const db = getDatabase();
@@ -53,6 +55,7 @@ const getAllProducts = () => {
   onValue(product, (snapshot) => {
       const data = snapshot.val();
       setallProducts(data);
+      setstatusMenuDefault('true')
     });
 }
 
@@ -76,7 +79,6 @@ const getAllSpecialMenu = () => {
     });
 }
 
-
   useEffect(() => {
     // getMenus()
     getAllCategories()
@@ -85,7 +87,6 @@ const getAllSpecialMenu = () => {
     // getAllSpecialMenu()
   }, [])
   
-
   const [selectedIndex, setselectedIndex] = useState(0);
   
   const openTab = (e, cate, ind) => {
@@ -97,14 +98,22 @@ const getAllSpecialMenu = () => {
     setMenu(theProducts)
   }
 
+  useEffect(() => {
+      console.log("useEffect All Products - ", allProducts)
+      let theProducts = Object.entries(allProducts).filter((prod, index) => prod[1].category === 'Breakfast')
+      console.log("useEffect The Products - ", theProducts);
+      setMenu(theProducts)  
+  }, [statusMenuDefault])
+  
 
   return (
     <section className="menu-book tabs  bg-gray " data-scroll-index="2">
-      <div className="container " style={{paddingTop: "3rem"}}>
-
+      <img src="img/decbg.png"  style={{marginTop: "80px"}}/>
+      <div className="container " >
+      
         <div className="row">
           <div className="col-12">
-            <div className="round-head text-center mb-80">
+            <div className="round-head text-center mb-80 mt-15">
               <h6 className="ls2 text-u fz-12 mb-15">special recipes<span></span></h6>
               <h2>Our Menu</h2>
             </div>
@@ -149,7 +158,7 @@ const getAllSpecialMenu = () => {
                     {
                       console.log("Product - ", menu)
                     }
-                    <h5 className="title fz-16 fw-600 text-u ls2">{ menu[1][1].name }</h5>
+                    <h5 className="title fz-16 fw-600 text-u ls2 textmenuwidth">{ menu[1][1].name }</h5>
                     <div className="dots"></div>
                     <h6 className="price" style={{marginLeft:15}}> ₹{menu[1][1].price }</h6>
                   </div>
@@ -185,7 +194,7 @@ const getAllSpecialMenu = () => {
                     {
                       console.log("Product - ", menu)
                     }
-                    <h5 className="title fz-16 fw-600 text-u ls2">{ menu[1][1].name }</h5>
+                    <h5 className="title fz-16 fw-600 ls2">{ menu[1][1].name }</h5>
                     <div className="dots"></div>
                     <h6 className="price" style={{marginLeft:15}}> ₹{menu[1][1].price }</h6>
                   </div>
@@ -227,6 +236,7 @@ const getAllSpecialMenu = () => {
           <img src="restaurant/img/plate3.png" alt="" />
         </div>
       </div>
+      <img src="img/decbg.png" />
     </section>
   )
 }
