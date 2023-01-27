@@ -177,6 +177,7 @@
   position: fixed;
   font-family: "GilroyMedium", sans-serif;
   padding: 8px 20px;
+  z-index: 50;
 }
 
 .contact-btn:hover{
