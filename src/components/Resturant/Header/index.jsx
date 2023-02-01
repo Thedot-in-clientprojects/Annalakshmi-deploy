@@ -371,8 +371,8 @@ function Header() {
     <header style={{paddingTop: 80}}   data-scroll-index="0">
           <div className='header-main'>
             <Container>
-              <img className='header-main-img' src="/img/headerimg.png" />
-              <h1 className='header-main-title'> Where vegetarian  dining <br/> is a cultural experience.</h1>
+              <img className='header-main-img' src="img/annalogo1.png" />
+              {/* <h1 className='header-main-title'> Where vegetarian  dining <br/> is a cultural experience.</h1> */}
              
             
                 {/* <button className="header-main-btn" onClick={handleOpen}>Reservation</button> */}

@@ -125,12 +125,17 @@
 
 @media screen and (max-width: 1450px) {
   .header-main{
-    background-position: right;
+    background-position: 85%;
+    justify-content: center;
+    justify-content: start;
+  }
+  .header-main-img{
+    margin-top: 11rem;
   }
 }
 
 .header-main-img{
-  width: 10rem;
+  width: 70%;
 }
 .header-main-title{
   margin-left: 1.5rem;
