@@ -9,12 +9,12 @@ function AboutOne() {
         <img src="img/decbg.png" /> 
         <div className="bg-layer">
         <div className="container" style={{display: "flex", justifyContent: "center", alignItems: "center", flexFlow: "column", paddingTop: "2rem", textAlign: "center", textCombineUpright:"center"}}>
-            <h5 style={{padding: "2rem 0"}} >Annalakshmi at a Glance</h5>
+            <h5 style={{padding: "2rem 0"}} className="ls2 mb-15 test-text-one saman">Annalakshmi at a Glance</h5>
             <h1 className="gilroyEB">Founder</h1>
             <img src="img/founder.png" className="founder-img" />
-            <h5  className="gilroyM">The foundation, strength and inspiration of Annalakshmi, is Swami Shantananda Saraswathi, who was born on 7th April 1934 as Chandrasekaran, in Thirukovillur, Tamil Nadu. Swamiji, as we endearingly call him, was initiated into divine Sanyas by Swami Sivananda, in 1951.
+            <h5  className="gilroyM">The foundation, strength and inspiration of Annalakshmi, is Swami Shantanand Saraswathi, who was born on 7th April 1934 as Chandrasekaran, in Thirukovillur, Tamil Nadu. Swamiji, as we endearingly call him, was initiated into divine Sanyas by Swami Sivananda, in 1951.
 
-Swamiji was responsible for the formation of dedicated institutions for numerous volunteers to practice Karma Yoga or Selfless Service. Annalakshmi, being one of these institutions, is where He allowed us to practice this infinite concept:
+Swamiji was instrumental for the formation of dedicated institutions for numerous volunteers to practice Karma Yoga or Selfless Service. Annalakshmi, being one of these institutions, is where He allowed us to practice this infinite concept:
 
 “Where we do service, not for financial gain, name or fame, but just to bring a little joy to our guests.”
 

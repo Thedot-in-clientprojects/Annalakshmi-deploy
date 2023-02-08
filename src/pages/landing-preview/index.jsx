@@ -55,8 +55,8 @@ const HomeRestaurant = () => {
           {/* <Features /> */}
           <Hero />
           <Button className="contact-btn" onClick={scrollToBottom}>Contact Us</Button>
-          <Services />
-          <Gallery />
+          {/* <Services /> */}
+          {/* <Gallery /> */}
           <Testimonials />
           {/* <CallAction /> */}
           
