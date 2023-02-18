@@ -54,7 +54,7 @@ const HomeRestaurant = () => {
         <main className="position-re">
           {/* <Features /> */}
           <Hero />
-          <Button className="contact-btn" onClick={scrollToBottom}>Contact Us</Button>
+          {/* <Button className="contact-btn" onClick={scrollToBottom}>Contact Us</Button> */}
           {/* <Services /> */}
           {/* <Gallery /> */}
           <Testimonials />
