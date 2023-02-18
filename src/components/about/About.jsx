@@ -81,6 +81,35 @@ We are grateful and delighted at the opportunity to serve you and thank you for 
                 South Indian specialties, our celebrated thalis hold new delights each day to satiate the
                 senses.
                 Come and immerse yourself in a divine dining experience at Annalakshmi.</h5>
+            
+            
+            
+            <h1 style={{paddingTop: "4rem"}} className="gilroyEB">Temple of Fine Arts</h1>
+            <img src="img/arts.png" className="founder-img" />
+            <h5 className="gilroyM" style={{ marginBottom: "2rem"}}>Adoration of the divine through the performing Arts
+The founding of The Temple of Fine Arts in India in 1996
+was a step, both into the past, as well as the future. Based on an
+idea as old as Vedas, and yet contemporary in its appeal to the
+young, it seeks to harness the energy of youth to preserve values
+that are timeless. Voluntary, non-sectarian and liberal,
+its growth over the years proves that the arts need not be mere thes
+events to be enjoyed sensually but to serve as a vehicle for the
+celebration of the spirit. If art expresses life and life is an
+expression of the spirit, it follows that all art is spiritual
+expressing he deepest impulses in man.<br/><br/>
+The Temple of Fine Arts is thus more than a temple of
+learning, it is an enclave of the past whose heritage and
+traditions have sustained society, whose life-giving energy holds
+out a promise for a better future.<br/><br/>
+The Temple of Fine Arts is a cultural and service oriented
+organization which has centers in Kuala Lampur, Penang
+Malacca, Johor Bauru, Singapore, Chennai, Coimbatore
+and Perth. Today, we are a well known organization in these
+countries, recognized and respected as an institution whose
+primary motive is that of service.
+Our story is simply the story of a Guru who touched
+hearts and lives of many, whose unconditional love for mankind
+inspired us to serve, love and give.</h5>
         </div>
         </div>
         </div>

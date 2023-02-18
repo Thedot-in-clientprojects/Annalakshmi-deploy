@@ -15,6 +15,9 @@ import { realDB } from '../../../lib/initFirebase';
 import Link from 'next/link'
 import 'firebase/database'
 import 'firebase/storage'
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css';
+import InnerImageZoom from 'react-inner-image-zoom';
+
 
 const Gallery = () => {
 
@@ -32,6 +35,48 @@ const getAllGallery = () => {
 }
 
 
+const galleryData =  [
+  {
+    imageURL: "assets/mone.png" 
+  },
+  {
+    imageURL: "assets/mtwo.png" 
+  },
+  {
+    imageURL: "assets/mthree.png" 
+  },
+  {
+    imageURL: "assets/mfour.png" 
+  },
+  {
+    imageURL: "assets/mfive.png" 
+  },
+  {
+    imageURL: "assets/msix.png" 
+  },
+  {
+    imageURL: "assets/mseven.png" 
+  },
+  {
+    imageURL: "assets/meight.png" 
+  },
+  {
+    imageURL: "assets/mnine.png" 
+  },
+  {
+    imageURL: "assets/mten.png" 
+  },
+  {
+    imageURL: "assets/meleven.png" 
+  },
+  {
+    imageURL: "assets/mtwelve.png" 
+  },
+  {
+    imageURL: "assets/mthirteen.png" 
+  },
+]
+
 useEffect(() => {
   getAllGallery()
 }, [])
@@ -39,25 +84,28 @@ useEffect(() => {
 
 
   return (
-    <section className="sipm-gallery section-padding dark-bg" data-scroll-index="4">
+    <section className="sipm-gallery section-padding light-bg" data-scroll-index="4">
       <div className="container-fluid ontop">
         <div className="row">
           <div className="col-12">
             <div className="round-head text-center mb-80">
-              <h6 className="ls2 text-u fz-12 mb-15">Our Gallery<span></span></h6>
-              <h2>Restaurant Gallery</h2>
+              <h2>Restaurant Menu</h2>
             </div>
           </div>
         </div>
+
         <div className="row mb-80 md-mb50" style={{ marginBottom:22 }}>
 
         {
-            allGallery && Object.entries(allGallery).map((gallery, index) => {
+            galleryData.map((gallery, index) => {
               return(
-                <div className={`col-lg-4 ${index == 1 ? 'valign':''}`} key={index}>
-                  <div className={`item-img ${index < 2 ? 'md-mb50':''}`}>
+                <div className={`col-lg-4 ${index == 1 ? 'valign':''}`} key={index} style={{
+                  marginBottom: 10
+                }}>
+                  <div className={`click-zoom item-img ${index < 2 ? 'md-mb50':''}`}>
                     <a href="#0">
-                      <img src={gallery[1].url} />
+                    <input type="checkbox"/>
+                    <InnerImageZoom src={gallery.imageURL} zoomSrc={gallery.imageURL} />
                     </a>
                   </div>
                 </div>

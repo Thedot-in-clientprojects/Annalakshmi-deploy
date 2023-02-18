@@ -8,12 +8,14 @@ import Features from '../../components/Resturant/Features';
 import Hero from '../../components/Resturant/Hero';
 import Menu from '../../components/Resturant/Menu';
 import Services from '../../components/Resturant/Services';
-import Gallery from '../../components/Resturant/Gallery';
+
 import Testimonials from '../../components/Resturant/Testimonials';
 import CallAction from '../../components/Resturant/CallAction';
 import Blog from '../../components/Resturant/Blog';
 import Footer from '../../components/Footers/RestaurantFooter';
 import { Button } from '@mui/material';
+import Gallery from '../../components/Resturant/Gallery';
+
 
 const HomeRestaurant = () => {
   useEffect(() => {
@@ -28,6 +30,12 @@ const HomeRestaurant = () => {
 
     document.body.classList.remove(...removeClasses);
   }, []);
+
+  const images = [
+    {
+       src: "assets/mone.png"
+    }
+ ];
 
   const nav_links = [
     
@@ -52,10 +60,16 @@ const HomeRestaurant = () => {
         <link rel="icon" href="/favicon.ico" />
         <title>Annalakshmi Restaurant</title>
       </Head>
+     
       <AppLayout type="restaurant" links={nav_links} navTheme="dark">
         {/* <Header /> */}
         <main className="position-re">
           {/* <Features /> */}
+          <div style={{
+            marginTop:120
+          }}>
+            <Gallery/>
+          </div>
           <Menu />
           <Button className="contact-btn" onClick={scrollToBottom}>Contact Us</Button>
           <Footer />
