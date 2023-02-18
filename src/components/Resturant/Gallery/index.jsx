@@ -114,24 +114,7 @@ useEffect(() => {
           }
            
         </div>
-        {/* <div className="row" style={{
-          margin:55
-        }}>
-          {
-              allGallery && Object.entries(allGallery).map((gallery, index) => (
-              index > 3 ? (
-                <div className={`col-lg-4 ${index == 4 ? '':'valign'}`} key={index}>
-                  <div className={`item-img ${index < 5 ? 'md-mb50':''}`}>
-                    <a href="#0">
-                      <img src={gallery[1].url} alt="" />
-                    </a>
-                  </div>
-                </div>
-              ) 
-              : null
-            ))
-          }
-        </div> */}
+    
       </div>
 
       <div className="pt top-left opacity-1">
