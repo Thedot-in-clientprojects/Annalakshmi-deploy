@@ -50,6 +50,7 @@ const Footer = () => {
                 </a>
               </Link>
               <h6 className="main-color mt-20">+91 9843021844</h6>
+              <h6 className="main-color mt-20">04222225415</h6>
             </div>
           </div>
         </div>
