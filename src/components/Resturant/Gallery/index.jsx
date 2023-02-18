@@ -94,7 +94,7 @@ useEffect(() => {
           </div>
         </div>
 
-        <div className="row mb-80 md-mb50" style={{ marginBottom:22 }}>
+        {/* <div className="row mb-80 md-mb50" style={{ marginBottom:22 }}>
 
         {
             galleryData.map((gallery, index) => {
@@ -113,7 +113,7 @@ useEffect(() => {
             })
           }
            
-        </div>
+        </div> */}
         {/* <div className="row" style={{
           margin:55
         }}>
