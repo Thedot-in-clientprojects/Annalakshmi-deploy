@@ -137,7 +137,7 @@ const Navbar = ({ links, navbarRef, theme, logoTheme, container }) => {
   }, [])
   
 
-
+  const [dataPresetStatus, setdataPresetStatus] = useState(false);
   const handleChange = (newValue) => {
     setdate(newValue);
     const db = getDatabase();
@@ -146,17 +146,36 @@ const Navbar = ({ links, navbarRef, theme, logoTheme, container }) => {
     console.log("Date Handle Change -> ", dayjs(date.$d).format('DD-MM-YYYY') )
     const sessionToday = ref(db, `/block/booking/date/${actualDate}`);
     onValue(sessionToday, (snapshot) => {
-        const data = snapshot.val();
+      const data = snapshot.val();
+      console.log("DATA -> ", data);
+      if(data){
         console.log("Check DATA -> Home Pae ", data);
-          console.log("Status -> ", data);
-          settempData(data)
-          settempStatus(data.status);
-          settempSessionTwelve(data.sessionTwelve);
-          settempSessionOne(data.sessionOne);
-          settempSessionTwo(data.sessionTwo);
-          settempDinner(data.dinner);
-          settempLunch(data.lunch);
-    });          
+        console.log("Status -> ", data);
+        settempData(data);
+        settempStatus(data.status);
+        settempSessionTwelve(data.sessionTwelve);
+        settempSessionOne(data.sessionOne);
+        settempSessionTwo(data.sessionTwo);
+        settempDinner(data.dinner);
+        settempLunch(data.lunch);
+      }
+      else{
+        set(ref(db, `/block/booking/date/${actualDate}`), {
+          date: actualDate,
+          status: 'opened',
+          sessionTwelve: 'opened',
+          sessionOne: 'opened',
+          sessionTwo: 'opened',
+          dinner:'opened',
+          lunch: 'opened'
+          }).then(res => {
+            setdataPresetStatus(!dataPresetStatus);
+        })
+      }
+      
+  });
+   
+              
   };
   
   
