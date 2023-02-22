@@ -70,7 +70,7 @@ const HomeRestaurant = () => {
           }}>
             <Gallery/>
           </div>
-          <Menu />
+          {/* <Menu /> */}
           <Button className="contact-btn" onClick={scrollToBottom}>Contact Us</Button>
           <Footer />
         </main>
